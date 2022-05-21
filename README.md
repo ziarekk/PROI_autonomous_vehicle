@@ -1,6 +1,6 @@
 # 209.3 pojazd autonomiczny
 
-**Projekt zespołowy przedmiot na PROI w semstrze 22L**
+**Projekt zespołowy na przedmiot PROI w semstrze 22L**<br/>
 **prowadzący: Krzysztof Gracki**
 
 
