@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.11.0)
-project(samochod_autonomiczny)
+project(my_project)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
@@ -49,7 +49,7 @@ ENDFOREACH()
 include_directories(${SOURCE_DIRECTORIES})
 
 # create a build target for the main project file
-add_executable(main src/Application/main.cpp ${SOURCES})
+add_executable(main src/main.cpp ${SOURCES})
 
 # create a build target for the testing file
 add_executable(tests ${TEST_SOURCES} ${SOURCES})
