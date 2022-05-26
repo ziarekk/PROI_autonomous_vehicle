@@ -1,12 +1,11 @@
 #include "Car.h"
+#include "../MapLib/Position.h"
 
-void Steering::setLocation(int const* loc) {
-    xLocation = loc[0];
-    yLocation = loc[1];
+void Steering::setLocation(Position loc) {
+    this->location = loc;
 }
-int* Steering::getLocation() const noexcept{
-    int *loc = new int [2] {xLocation, yLocation};
-    return loc;
+Position Steering::getLocation() const noexcept{
+    return location;
 }
 int Steering::getSpeed() const noexcept {
     return speed;
@@ -58,49 +57,51 @@ void Steering::turnRight() noexcept {
     }
 }
 
-Car::Car(int *starting_position, World world, int acceleration, int max_speed) {
+Car::Car(Position starting_position, Map world, int acceleration, int max_speed) {
     this->setLocation(starting_position);
     this->setAcceleration(acceleration);
     this->setMaxSpeed(max_speed);
     this->world = world;
 }
 Car::Car() noexcept {
-    int loc[2] {50, 50};
+    Position loc(50, 50);
     this->setLocation(loc);
     this->setAcceleration(4);
     this->setMaxSpeed(20);
 }
-bool TouchSensor::getInfo(int* location, World world) noexcept {
-    int x = location[0]; int y = location[1];
-    int loc1[2] {x-1, y};
+bool TouchSensor::getInfo(Position location, Map world) noexcept {
+    int x = location.x;
+    int y = location.y;
+    Position loc1(x-1, y);
     if (world(loc1).getIsBarrier() == true)
         return isTouched = true;
-    int loc2[2] {x+1, y};
+    Position loc2(x+1, y);
     if (world(loc2).getIsBarrier() == true)
         return isTouched = true;
-    int loc3[2] {x, y-1};
+    Position loc3(x, y-1);
     if (world(loc3).getIsBarrier() == true)
         return isTouched = true;
-    int loc4[2] {x, y+1};
+    Position loc4(x, y+1);
     if (world(loc4).getIsBarrier() == true)
         return isTouched = true;
     isTouched = false;
     return isTouched;
 }
-int HumiditySensor::getHumidity(int* location, World world) noexcept {
+int HumiditySensor::getHumidity(Position location, Map world) noexcept {
     return world(location).getHumidity();
 }
 
-int SurfaceSensor::getCondition(int* location, World world) noexcept {
+int SurfaceSensor::getCondition(Position location, Map world) noexcept {
     return world(location).getSurface_Condition();
 }
-int RadarSensor::getDistance(int *location, World world, char direction) {
-    int x = location[0]; int y = location[1];
+int RadarSensor::getDistance(Position location, Map world, char direction) {
+    int x = location.x;
+    int y = location.y;
     if (direction == 'n')
     {
-        for (int i=y;i<99;i++)
+        for (int i = y; i < 99; i++)
         {
-            int loc1[2] {x, i};
+            Position loc1(x, i);
             if (world(loc1).getIsBarrier() == true)
             {
                 return i - y;
@@ -112,7 +113,7 @@ int RadarSensor::getDistance(int *location, World world, char direction) {
     {
         for (int i=x;i<99;i++)
         {
-            int loc2[2] {i, y};
+            Position loc2(i, y);
             if (world(loc2).getIsBarrier() == true)
             {
                 return i - x;
@@ -122,9 +123,9 @@ int RadarSensor::getDistance(int *location, World world, char direction) {
     }
     if (direction == 'w')
     {
-        for (int i=x;i>0;i--)
+        for (int i = x; i > 0; i--)
         {
-            int loc3[2] {i, y};
+            Position loc3(i, y);
             if (world(loc3).getIsBarrier() == true)
             {
                 return x - i;
@@ -136,7 +137,7 @@ int RadarSensor::getDistance(int *location, World world, char direction) {
     {
         for (int i=y;y>0;i--)
         {
-            int loc4[2] {x, i};
+            Position loc4(x, i);
             if (world(loc4).getIsBarrier() == true)
             {
                 return y - i;
@@ -147,14 +148,14 @@ int RadarSensor::getDistance(int *location, World world, char direction) {
     }
 }
 
-ThinkingCar::ThinkingCar(int *starting_position, World world, int acceleration, int max_speed) {
+ThinkingCar::ThinkingCar(Position starting_position, Map world, int acceleration, int max_speed) {
     this->setLocation(starting_position);
     this->setAcceleration(acceleration);
     this->setMaxSpeed(max_speed);
     this->world = world;
 }
 ThinkingCar::ThinkingCar() noexcept {
-    int loc[2] {50, 50};
+    Position loc(50, 50);
     this->setLocation(loc);
     this->setAcceleration(4);
     this->setMaxSpeed(20);

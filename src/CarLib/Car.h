@@ -1,18 +1,19 @@
+#pragma once
 #include <vector>
 #include "../MapLib/map.h"
+#include "../MapLib/Position.h"
 
 class Steering
 {
 private:
     char direction='n';
-    int xLocation=49;
-    int yLocation=49;
+    Position location;
     int speed=0;
     int maxSpeed=20;
     int acceleration=4;
 public:
-    void setLocation(int const* loc);
-    int* getLocation() const noexcept;
+    void setLocation(Position loc);
+    Position getLocation() const noexcept;
     int getSpeed() const noexcept;
     void setMaxSpeed(int max);
     void setAcceleration(int acc);
@@ -31,9 +32,9 @@ class Car: public Steering
 {
 private:
     std::vector<Sensor> list_of_sensors;
-    World world;
+    Map world;
 public:
-    Car(int* starting_position, World world, int acceleration=4, int max_speed=20);
+    Car(Position starting_position, Map world, int acceleration=4, int max_speed=20);
     Car() noexcept;
 };
 
@@ -42,7 +43,7 @@ class TouchSensor: public Sensor
 private:
     bool isTouched;
 public:
-    bool getInfo(int* location, World world) noexcept;
+    bool getInfo(Position location, Map world) noexcept;
 };
 
 class HumiditySensor
@@ -50,7 +51,7 @@ class HumiditySensor
 private:
     int humidity;
 public:
-    int getHumidity(int* location, World world) noexcept;
+    int getHumidity(Position location, Map world) noexcept;
 };
 
 class SurfaceSensor: public Sensor
@@ -58,7 +59,7 @@ class SurfaceSensor: public Sensor
 private:
     int surface_condition;
 public:
-    int getCondition(int* location, World world) noexcept;
+    int getCondition(Position location, Map world) noexcept;
 };
 
 class RadarSensor: public Sensor
@@ -66,7 +67,7 @@ class RadarSensor: public Sensor
 private:
     int distance;
 public:
-    int getDistance(int*location, World world, char direction);
+    int getDistance(Position location, Map world, char direction);
 };
 
 class ThinkingCar: public Car
@@ -76,9 +77,9 @@ private:
     HumiditySensor humidity;
     SurfaceSensor condition;
     RadarSensor radar;
-    World world;
+    Map world;
 public:
-    ThinkingCar(int* starting_position, World world, int acceleration=4, int max_speed=20);
+    ThinkingCar(Position starting_position, Map world, int acceleration=4, int max_speed=20);
     ThinkingCar() noexcept;
     bool getTouchInfo() noexcept;
     int getHumidityInfo() noexcept;
