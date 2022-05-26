@@ -1,15 +1,16 @@
 #include <iostream>
 #include <vector>
 #include "SafeDriver.h"
+#include "../CarExample/Position.h"
 
 using namespace std;
 
 SafeDriver::SafeDriver() noexcept {
-    this->position = vector<int> {0, 0};
+    this->position = Position();
     this->speed = 50;
 }
 
-SafeDriver::SafeDriver(vector<int> position, char direction, vector<int> destination, vector<int> distances, vector<int> attributes) noexcept {
+SafeDriver::SafeDriver(Position position, char direction, Position destination, vector<int> distances, vector<int> attributes) noexcept {
     this->position = position;
     this->direction = direction;
     this->destination = destination;
@@ -20,7 +21,7 @@ SafeDriver::SafeDriver(vector<int> position, char direction, vector<int> destina
     this->calculateSpeed();
 }
 
-void SafeDriver::updatePosition(vector<int> new_position, char new_direction, vector<int> new_distances, vector<int> new_attributes) noexcept {
+void SafeDriver::updatePosition(Position new_position, char new_direction, vector<int> new_distances, vector<int> new_attributes) noexcept {
     this->position = new_position;
     this->direction = new_direction;
     this->wall_distances = new_distances;
