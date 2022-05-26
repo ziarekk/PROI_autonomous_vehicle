@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 #include "Car.h"
 
-namespace {
+namespace CarUnitTest {
     TEST(CarUnitTest, getSpeedTest1) {
         int loc[2] {49, 50};
         World world;
