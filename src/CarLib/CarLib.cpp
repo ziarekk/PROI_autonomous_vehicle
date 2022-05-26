@@ -1,64 +1,70 @@
 #include "Car.h"
-#include <thread>
-#include <chrono>
 
-Location Steering::getLocation() const noexcept{
-    Location loc;
-    loc.xLocation = xLocation;
-    loc.yLocation = yLocation;
+void Steering::setLocation(int const* loc) {
+    xLocation = loc[0];
+    yLocation = loc[1];
+}
+int* Steering::getLocation() const noexcept{
+    int *loc = new int [2] {xLocation, yLocation};
     return loc;
 }
 int Steering::getSpeed() const noexcept {
     return speed;
 }
-void Steering::setSpeed(int new_speed) {
-    this->speed = new_speed;
+void Steering::setMaxSpeed(int max) {
+    this->maxSpeed = max;
 }
-void Steering::goLeft(int time) {
-    if (speed > 0) {
-        for (int i = 0; i < time*speed; i++) {
-            if (xLocation > 0)
-                xLocation--;
-            std::this_thread::sleep_for(std::chrono::milliseconds(1000/speed));
-        }
-    }
+void Steering::setAcceleration(int acc) {
+    this->acceleration = acc;
 }
-void Steering::goRight(int time) {
-    if (speed > 0) {
-        for (int i = 0; i < time*speed; i++) {
-            if (xLocation < 99)
-                xLocation++;
-            std::this_thread::sleep_for(std::chrono::milliseconds(1000/speed));
-        }
-    }
+char Steering::getDirection() const noexcept {
+    return direction;
 }
-void Steering::goUp(int time) {
-    if (speed > 0) {
-        for (int i = 0; i < time*speed; i++) {
-            if (yLocation < 99)
-                yLocation++;
-            std::this_thread::sleep_for(std::chrono::milliseconds(1000/speed));
-        }
-    }
-}
-void Steering::goDown(int time) {
-    if (speed > 0) {
-        for (int i = 0; i < time*speed; i++) {
-            if (yLocation > 0)
-                yLocation--;
-            std::this_thread::sleep_for(std::chrono::milliseconds(1000/speed));
-        }
-    }
-}
+void Steering::accelerate() noexcept {
 
-Field::Field(Location location) noexcept {
-    this->xLocation = location.xLocation;
-    this->yLocation = location.yLocation;
+    this->speed = std::min(speed+acceleration, maxSpeed);
 }
-Location Field::getLocation() const noexcept {
-    Location loc;
-    loc.xLocation = xLocation;
-    loc.yLocation = yLocation;
+void Steering::brake() noexcept {
+    this->speed = 0;
+}
+void Steering::turnLeft() noexcept {
+    char directions [4] {'n', 'e', 's', 'w'};
+    for (int i=0; i<3; i++)
+    {
+        if (directions[i] == direction)
+        {
+            i--;
+            if (i < 0)
+            {
+                i=3;
+            }
+            direction = directions[i];
+        }
+    }
+}
+void Steering::turnRight() noexcept {
+    char directions [4] {'n', 'e', 's', 'w'};
+    for (int i=0; i<3; i++)
+    {
+        if (directions[i] == direction)
+        {
+            i++;
+            if (i > 3)
+            {
+                i=0;
+            }
+            direction = directions[i];
+        }
+    }
+}
+Field::Field(int* location) noexcept {
+    this->xLocation = location[0];
+    this->yLocation = location[1];
+}
+int* Field::getLocation() const noexcept {
+    int *loc = new int[2];
+    loc[0] = xLocation;
+    loc[1] = yLocation;
     return loc;
 }
 bool Field::getIsBarrier() const noexcept {
@@ -79,12 +85,6 @@ int Field::getSurface_Condition() const noexcept {
 void Field::setSurface_Condition(int condition) {
     this->surface_condition = condition;
 }
-int Field::getMinimal_Horsepower() const noexcept {
-    return minimal_horsepower;
-}
-void Field::setMinimal_Horsepower(int HP) {
-    this->minimal_horsepower = HP;
-}
 World::World() noexcept {
     std::vector<std::vector<Field>> outside;
     for (int i = 0; i < 100; i++)
@@ -92,9 +92,9 @@ World::World() noexcept {
         std::vector<Field> inside;
         for (int j = 0; j < 100; j++)
         {
-            Location loc;
-            loc.xLocation = i;
-            loc.yLocation = j;
+            int loc[2];
+            loc[0] = i;
+            loc[1] = j;
             Field field(loc);
             inside.push_back(field);
         }
@@ -103,53 +103,125 @@ World::World() noexcept {
     field_container = outside;
 }
 void World::setField(Field square) {
-    Location v = square.getLocation();
-    field_container[v.xLocation][v.yLocation] = square;
+    int* v = square.getLocation();
+    field_container[v[0]][v[1]] = square;
 }
 std::vector<std::vector<Field>> World::getFieldContainer() const noexcept {
     return field_container;
 }
-Field World::operator()(Location location) const noexcept {
-    return field_container[location.xLocation][location.yLocation];
+Field World::operator()(int* location) const noexcept {
+    return field_container[location[0]][location[1]];
 }
-
-bool TouchSensor::getInfo(Location location, World world) noexcept {
-    if (world(location).getIsBarrier() == true)
-        isTouched = true;
+Car::Car(int *starting_position, World world, int acceleration, int max_speed) {
+    this->setLocation(starting_position);
+    this->setAcceleration(acceleration);
+    this->setMaxSpeed(max_speed);
+    this->world = world;
+}
+Car::Car() noexcept {
+    int loc[2] {50, 50};
+    this->setLocation(loc);
+    this->setAcceleration(4);
+    this->setMaxSpeed(20);
+}
+bool TouchSensor::getInfo(int* location, World world) noexcept {
+    int x = location[0]; int y = location[1];
+    int loc1[2] {x-1, y};
+    if (world(loc1).getIsBarrier() == true)
+        return isTouched = true;
+    int loc2[2] {x+1, y};
+    if (world(loc2).getIsBarrier() == true)
+        return isTouched = true;
+    int loc3[2] {x, y-1};
+    if (world(loc3).getIsBarrier() == true)
+        return isTouched = true;
+    int loc4[2] {x, y+1};
+    if (world(loc4).getIsBarrier() == true)
+        return isTouched = true;
+    isTouched = false;
     return isTouched;
 }
-
-int HumiditySensor::getHumidity(Location location, World world) noexcept {
+int HumiditySensor::getHumidity(int* location, World world) noexcept {
     return world(location).getHumidity();
 }
 
-int SurfaceSensor::getCondition(Location location, World world) noexcept {
+int SurfaceSensor::getCondition(int* location, World world) noexcept {
     return world(location).getSurface_Condition();
 }
+int RadarSensor::getDistance(int *location, World world, char direction) {
+    int x = location[0]; int y = location[1];
+    if (direction == 'n')
+    {
+        for (int i=y;i<99;i++)
+        {
+            int loc1[2] {x, i};
+            if (world(loc1).getIsBarrier() == true)
+            {
+                return i - y;
+            }
+        }
+        return 99 - y;
+    }
+    if (direction == 'e')
+    {
+        for (int i=x;i<99;i++)
+        {
+            int loc2[2] {i, y};
+            if (world(loc2).getIsBarrier() == true)
+            {
+                return i - x;
+            }
+        }
+        return 99 - x;
+    }
+    if (direction == 'w')
+    {
+        for (int i=x;i>0;i--)
+        {
+            int loc3[2] {i, y};
+            if (world(loc3).getIsBarrier() == true)
+            {
+                return x - i;
+            }
+        }
+        return x - 0;
+    }
+    if (direction == 's')
+    {
+        for (int i=y;y>0;i--)
+        {
+            int loc4[2] {x, i};
+            if (world(loc4).getIsBarrier() == true)
+            {
+                return y - i;
+            }
+            else
+                return y - 0;
+        }
+    }
+}
 
-bool ThinkingCar::getTouchInfo(World world) noexcept {
+ThinkingCar::ThinkingCar(int *starting_position, World world, int acceleration, int max_speed) {
+    this->setLocation(starting_position);
+    this->setAcceleration(acceleration);
+    this->setMaxSpeed(max_speed);
+    this->world = world;
+}
+ThinkingCar::ThinkingCar() noexcept {
+    int loc[2] {50, 50};
+    this->setLocation(loc);
+    this->setAcceleration(4);
+    this->setMaxSpeed(20);
+}
+bool ThinkingCar::getTouchInfo() noexcept {
     return touch.getInfo(this->getLocation(), world);
 }
-int ThinkingCar::getHumidityInfo(World world) noexcept {
+int ThinkingCar::getHumidityInfo() noexcept {
     return humidity.getHumidity(this->getLocation(), world);
 }
-int ThinkingCar::getSurfaceCondition(World world) noexcept {
+int ThinkingCar::getSurfaceCondition() noexcept {
     return condition.getCondition(this->getLocation(), world);
 }
-
-void Car::setPower(int HP) {
-    horsepower = HP;
-}
-
-int Car::getPower(int HP) {
-    return horsepower;
-}
-
-bool Car::isEnoughPower(World world) noexcept {
-    Location location = this->getLocation();
-    if (world(location).getIsBarrier() == true)
-        canDrive = true;
-    else
-        canDrive = false;
-    return canDrive;
+int ThinkingCar::getRadarInfo() noexcept {
+    return radar.getDistance(this->getLocation(), world, this->getDirection());
 }

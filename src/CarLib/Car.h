@@ -1,24 +1,25 @@
 #include <vector>
 
-struct Location{
-    int xLocation;
-    int yLocation;
-};
-
 class Steering
 {
 private:
+    char direction='n';
     int xLocation=49;
     int yLocation=49;
     int speed=0;
+    int maxSpeed=20;
+    int acceleration=4;
 public:
-    Location getLocation() const noexcept;
+    void setLocation(int const* loc);
+    int* getLocation() const noexcept;
     int getSpeed() const noexcept;
-    void setSpeed(int new_speed);
-    void goLeft(int time);
-    void goRight(int time);
-    void goUp(int time);
-    void goDown(int time);
+    void setMaxSpeed(int max);
+    void setAcceleration(int acc);
+    char getDirection() const noexcept;
+    void accelerate() noexcept;
+    void brake() noexcept;
+    void turnLeft() noexcept;
+    void turnRight() noexcept;
 };
 
 class Field
@@ -26,22 +27,19 @@ class Field
 private:
     int xLocation;
     int yLocation;
-    bool isBarrier;
+    bool isBarrier=false;
     int humidity;
     int surface_condition;
-    int minimal_horsepower;
 public:
     Field() noexcept;
-    Field(Location location) noexcept;
-    Location getLocation() const noexcept;
+    Field(int* location) noexcept;
+    int* getLocation() const noexcept;
     bool getIsBarrier() const noexcept;
     void setIsBarrier(bool barrier);
     int getHumidity() const noexcept;
     void setHumidity(int hum);
     int getSurface_Condition() const noexcept;
     void setSurface_Condition(int condition);
-    int getMinimal_Horsepower() const noexcept;
-    void setMinimal_Horsepower(int HP);
 };
 
 class World
@@ -52,24 +50,21 @@ public:
     World() noexcept;
     void setField(Field square);
     std::vector<std::vector<Field>> getFieldContainer() const noexcept;
-    Field operator()(Location location) const noexcept;
+    Field operator()(int* location) const noexcept;
 };
 
 class Sensor
 {
-
 };
 
 class Car: public Steering
 {
 private:
     std::vector<Sensor> list_of_sensors;
-    int horsepower;
-    bool canDrive;
+    World world;
 public:
-    void setPower(int HP);
-    int getPower(int HP);
-    bool isEnoughPower(World world) noexcept;
+    Car(int* starting_position, World world, int acceleration=4, int max_speed=20);
+    Car() noexcept;
 };
 
 class TouchSensor: public Sensor
@@ -77,7 +72,7 @@ class TouchSensor: public Sensor
 private:
     bool isTouched;
 public:
-    bool getInfo(Location location, World world) noexcept;
+    bool getInfo(int* location, World world) noexcept;
 };
 
 class HumiditySensor
@@ -85,7 +80,7 @@ class HumiditySensor
 private:
     int humidity;
 public:
-    int getHumidity(Location location, World world) noexcept;
+    int getHumidity(int* location, World world) noexcept;
 };
 
 class SurfaceSensor: public Sensor
@@ -93,7 +88,15 @@ class SurfaceSensor: public Sensor
 private:
     int surface_condition;
 public:
-    int getCondition(Location location, World world) noexcept;
+    int getCondition(int* location, World world) noexcept;
+};
+
+class RadarSensor: public Sensor
+{
+private:
+    int distance;
+public:
+    int getDistance(int*location, World world, char direction);
 };
 
 class ThinkingCar: public Car
@@ -102,31 +105,13 @@ private:
     TouchSensor touch;
     HumiditySensor humidity;
     SurfaceSensor condition;
-    int horsepower = 80;
+    RadarSensor radar;
+    World world;
 public:
-    bool getTouchInfo(World world) noexcept;
-    int getHumidityInfo(World world) noexcept;
-    int getSurfaceCondition(World world) noexcept;
-};
-
-class SensitiveStrongCar: public Car
-{
-private:
-    TouchSensor touch;
-    int horsepower = 250;
-public:
-    bool getTouchInfo(World world) noexcept;
-};
-
-class ThinkingStrongCar: public Car
-{
-private:
-    TouchSensor touch;
-    HumiditySensor humidity;
-    SurfaceSensor condition;
-    int horsepower = 300;
-public:
-    bool getTouchInfo(World world) noexcept;
-    int getHumidityInfo(World world) noexcept;
-    int getSurfaceCondition(World world) noexcept;
+    ThinkingCar(int* starting_position, World world, int acceleration=4, int max_speed=20);
+    ThinkingCar() noexcept;
+    bool getTouchInfo() noexcept;
+    int getHumidityInfo() noexcept;
+    int getSurfaceCondition() noexcept;
+    int getRadarInfo() noexcept;
 };
