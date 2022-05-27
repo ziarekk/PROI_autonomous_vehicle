@@ -1,10 +1,20 @@
 #include "displays.h"
 
-void ConsoleDisplay::setPosition(Coords coords) {
-    SetConsoleCursorPosition(out, coords.getCOORD());
+static HANDLE out = GetStdHandle(STD_OUTPUT_HANDLE);
+
+void ConsoleDisplay::setPosition(COORD coords) {
+    SetConsoleCursorPosition(out, coords);
 }
 
-void ConsoleDisplay::drawPoint(Coords coords, char character) {
-    setPosition(coords);
+void ConsoleDisplay::drawPoint(Position position, char character) {
+
+    setPosition(ToCOORD(position));
     std::cout<<character;
+}
+
+COORD ConsoleDisplay::ToCOORD(Position position){
+    COORD newCoord;
+    newCoord.X = SHORT(position.x);
+    newCoord.Y = SHORT(position.y);
+    return newCoord;
 }

@@ -1,24 +1,24 @@
 #include "objects.h"
 
 void DisplayTile::draw(){
-    display.drawPoint(coords, character);
+    display.drawPoint(position, character);
 }
 
 void DisplayCar::draw(){
-    display.drawPoint(coords, character);
+    display.drawPoint(position, character);
 }
 
 void DisplayLine::draw(){
-    Coords tmp = coords;
+    Position tmp = position;
     if (axis){       // axis = 1 - horizontal line
         for(int i=0; i<length; i++){
             display.drawPoint(tmp, character);
-            tmp.x_up();
+            tmp.x++;
         }}
     else{            // axis = 0 - vertical line
         for(int i=0; i<length; i++){
             display.drawPoint(tmp, character);
-            tmp.y_up();
+            tmp.y++;
         }}
 }
 
