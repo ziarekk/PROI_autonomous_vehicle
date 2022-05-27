@@ -6,10 +6,12 @@ int main() {
     Map map;
     Drawing drawUI;
     ConsoleDisplay cmdDisplay;
-    Position position(10,10);
+    Position position(8,8);
     Car car(position, map);
     dataLoader Loader(drawUI, cmdDisplay, map, car);
 
+
+    // fulfill map
     for(int i=0; i<20; i++) {
         if(i==0 || i==19)
             {
@@ -37,13 +39,32 @@ int main() {
 
     }
 
-
+    // load data from map&car and display it
     Loader.load_data();
     drawUI.display();
 
+    // take a break so we can look
     Coords coord(25, 25);
     drawUI += std::make_unique<DisplayTile>(DisplayTile(coord, cmdDisplay, ' '));
     drawUI.display();
+    Sleep(1000);
+
+
+    // move the car and display it 8 times
+    for(int i=8; i < 16; i++){
+        Position newPos(i,i);
+        car.setLocation(newPos);
+        Loader.load_data();
+        drawUI.display();
+
+        // take a break so we can look
+        drawUI += std::make_unique<DisplayTile>(DisplayTile(coord, cmdDisplay, ' '));
+        drawUI.display();
+        Sleep(1000);
+
+    }
+
+    // wait for the interaction
     system("pause");
     return 0;
 }
