@@ -77,9 +77,9 @@ private:
     HumiditySensor humidity;
     SurfaceSensor condition;
     RadarSensor radar;
-    Map world;
+    Map &world;
 public:
-    ThinkingCar(Position starting_position, Map world, int acceleration=4, int max_speed=20);
+    ThinkingCar(Position starting_position, Map &world, int acceleration=4, int max_speed=20);
     ThinkingCar() noexcept;
     bool getTouchInfo() noexcept;
     int getHumidityInfo() noexcept;
