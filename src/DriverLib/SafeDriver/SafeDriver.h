@@ -10,6 +10,6 @@ protected:
     void calculateSpeed() noexcept;
 public:
     SafeDriver() noexcept;
-    SafeDriver(Position position, char direction, Position destination, std::vector<int> distances, std::vector<int> attributes) noexcept;
-    void updatePosition(Position new_position, char new_direction, std::vector<int> new_distances, std::vector<int> new_attributes) noexcept;
+    SafeDriver(Position position, int maxSpeed, char direction, Position destination, std::vector<int> distances, std::vector<int> attributes) noexcept;
+    void updatePosition(Car &car) noexcept;
 };

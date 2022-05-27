@@ -7,27 +7,30 @@ using namespace std;
 
 Driver::Driver() noexcept {
     this->position = Position();
-    this->speed = 50;
+    this->speed = 1;
 }
 
-Driver::Driver(Position position, char direction, Position destination, vector<int> distances, vector<int> attributes) noexcept {
+Driver::Driver(Position position, int maxSpeed, char direction, Position destination, vector<int> distances, vector<int> attributes) noexcept {
     this->position = position;
     this->direction = direction;
     this->destination = destination;
-    this->speed = 50;
+    this->speed = maxSpeed;
     this->wall_distances = distances;
     this->road_quality = attributes[0];
     this->temperature = attributes[1];
     this->humidity = attributes[2];
+    car.accelerate(this->speed);
 }
 
-void Driver::updatePosition(Position new_position, char new_direction, std::vector<int> new_distances, std::vector<int> new_attributes) {
-    this->position = new_position;
-    this->direction = new_direction;
-    this->wall_distances = new_distances;
-    this->road_quality = new_attributes[0];
-    this->temperature = new_attributes[1];
-    this->humidity = new_attributes[2];
+void Driver::updatePosition(Car &car) {
+    vector<int> attributes = car.getAttributes();
+    this->position = car.getLocation();
+    this->direction = car.getDirection();
+    this->wall_distances = car.getRadarInfo();
+    this->road_quality = attributes[0];
+    this->temperature = attributes[1];
+    this->humidity = attributes[2];
+    car.accelerate(this->speed);
 }
 
 Position Driver::getDestination() const noexcept {
@@ -73,6 +76,7 @@ void Driver::navigate(Car &car) noexcept {
     // destination reached
     if (position == destination) {
         this->speed = 0;
+        car.accelerate(this->speed);
         return;
     }
     // avoid obstacle
