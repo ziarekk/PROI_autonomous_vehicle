@@ -1,10 +1,8 @@
 #include "graphics.h"
 
-static HANDLE out = GetStdHandle(STD_OUTPUT_HANDLE);
-
 COORD Coords::getCOORD(){
     COORD point;
-    point.X = X; point.Y = Y;
+    point.X = SHORT(X); point.Y = SHORT(Y);
     return point;
 }
 

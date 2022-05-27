@@ -27,10 +27,10 @@ void Field::setSurface_Condition(int condition) {
 }
 
 Map::Map() noexcept {
-    for (int i = 0; i < 100; i++)
+    for (int i = 0; i < 20; i++)
     {
         std::vector<Field> inside;
-        for (int j = 0; j < 100; j++)
+        for (int j = 0; j < 20; j++)
         {
             Field field(Position(i, j));
             inside.push_back(field);

@@ -1,5 +1,7 @@
 #include "displays.h"
 
+static HANDLE out = GetStdHandle(STD_OUTPUT_HANDLE);
+
 void ConsoleDisplay::setPosition(Coords coords) {
     SetConsoleCursorPosition(out, coords.getCOORD());
 }

@@ -8,7 +8,7 @@
 
 class Coords{
 public:
-    SHORT X,Y;
+    int X,Y;
     Coords(): X(0), Y(0){};
     Coords(int X, int Y): X(X), Y(Y) {};
     void x_up();

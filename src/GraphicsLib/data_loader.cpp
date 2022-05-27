@@ -3,7 +3,7 @@
 void dataLoader::load_data() {
     Coords coord;
     char mark;
-    for(auto vector: map.getFieldContainer()){
+    for(auto& vector: map.getFieldContainer()){
         for(auto field: vector){
             coord.X = field.getLocation().x;
             coord.Y = field.getLocation().y;
