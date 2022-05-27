@@ -44,8 +44,8 @@ int main() {
     drawUI.display();
 
     // take a break so we can look
-    Coords coord(25, 25);
-    drawUI += std::make_unique<DisplayTile>(DisplayTile(coord, cmdDisplay, ' '));
+    Position somePosition(25, 25);
+    drawUI += std::make_unique<DisplayTile>(DisplayTile(somePosition, cmdDisplay, ' '));
     drawUI.display();
     Sleep(1000);
 
@@ -58,7 +58,7 @@ int main() {
         drawUI.display();
 
         // take a break so we can look
-        drawUI += std::make_unique<DisplayTile>(DisplayTile(coord, cmdDisplay, ' '));
+        drawUI += std::make_unique<DisplayTile>(DisplayTile(somePosition, cmdDisplay, ' '));
         drawUI.display();
         Sleep(1000);
 

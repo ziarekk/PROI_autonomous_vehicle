@@ -3,10 +3,10 @@
 
 class Object{
 protected:
-    Coords coords = Coords(0,0);
+    Position position;
     Display& display;
 public:
-    Object(Coords coords, Display& display): coords(coords), display(display) {};
+    Object(Position position, Display& display): position(position), display(display) {};
     virtual void draw() = 0;
 };
 
@@ -14,7 +14,7 @@ class DisplayTile: public Object{
 protected:
     char character=char(2);
 public:
-    DisplayTile(Coords coords, Display& display, char character): Object(coords, display){
+    DisplayTile(Position position, Display& display, char character): Object(position, display){
         this->character = character;
     };
     void draw() override;
@@ -24,7 +24,7 @@ class DisplayCar: public Object{
 protected:
     char character=char(2);
 public:
-    DisplayCar(Coords coords, Display& display): Object(coords, display){};
+    DisplayCar(Position position, Display& display): Object(position, display){};
     void draw() override;
 };
 
@@ -34,7 +34,7 @@ protected:
     bool axis = false;
     char character='0';
 public:
-    DisplayLine(Coords coords, int length, bool axis, char character, Display& display):
-            Object(coords, display), length(length), axis(axis), character(character) {};
+    DisplayLine(Position position, int length, bool axis, char character, Display& display):
+            Object(position, display), length(length), axis(axis), character(character) {};
     void draw() override;
 };
