@@ -18,21 +18,18 @@ int main() {
             for (int j = 0; j < 20; j++)
                 {
                 Position position2(j,i);
-                Field tmpField(position2);
-                tmpField.setIsBarrier(true);
+                Field tmpField(position2, true, 0, 0, 0);
                 map.setField(tmpField);
                 }
             }
         else
         {
             Position position2(0,i);
-            Field tmpField1(position2);
-            tmpField1.setIsBarrier(true);
+            Field tmpField1(position2, true, 0, 0,0 );
             map.setField(tmpField1);
 
             Position position3(19,i);
-            Field tmpField2(position3);
-            tmpField2.setIsBarrier(true);
+            Field tmpField2(position3, true, 0, 0, 0);
             map.setField(tmpField2);
 
         }

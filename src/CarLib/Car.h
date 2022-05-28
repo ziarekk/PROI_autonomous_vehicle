@@ -2,85 +2,41 @@
 #include <vector>
 #include "../MapLib/map.h"
 #include "../MapLib/Position.h"
+#include "Sensor.h"
 
 class Steering
 {
-private:
+protected:
     char direction='n';
     int speed=0;
     int maxSpeed=20;
 public:
-    int getSpeed() const noexcept;
-    void setMaxSpeed(int max);
-    int getMaxSpeed() const noexcept;
-    char getDirection() const noexcept;
-    void accelerate(int new_speed);
-    void brake() noexcept;
-    void turnLeft() noexcept;
-    void turnRight() noexcept;
+   virtual int getSpeed() const noexcept;
+   virtual void setMaxSpeed(int max);
+   virtual int getMaxSpeed() const noexcept;
+   virtual char getDirection() const noexcept;
+   virtual void accelerate(int new_speed);
+   virtual void turnLeft() noexcept;
+   virtual void turnRight() noexcept;
 };
 
-class Sensor
-{
-};
-
-class Car: public Steering
+class BaseCar: public Steering
 {
 protected:
     Position location;
     int maxSpeed=20;
-private:
     std::vector<Sensor> list_of_sensors;
+
 public:
     void setLocation(Position loc);
     Position getLocation() const noexcept;
-    Car(Position starting_position, int max_speed=20) : location(starting_position), maxSpeed(max_speed) {};
-    Car() noexcept {};
+    BaseCar(Position starting_position, int max_speed=20) : location(starting_position), maxSpeed(max_speed) {};
+    BaseCar() noexcept {};
 };
 
-class TouchSensor: public Sensor
+class Car: public BaseCar
 {
-private:
-    bool isTouched;
-public:
-    bool getIsTouched(Position location, Map& world) noexcept;
-};
-
-class HumiditySensor
-{
-private:
-    int humidity;
-public:
-    int getInfo(Position location, Map& world) noexcept;
-};
-
-class SurfaceSensor: public Sensor
-{
-private:
-    int surface_condition;
-public:
-    int getInfo(Position location, Map& world) noexcept;
-};
-
-class TemperatureSensor: public Sensor
-{
-private:
-    int temperature;
-public:
-    int getInfo(Position location, Map& world) noexcept;
-};
-
-class RadarSensor: public Sensor
-{
-private:
-    int distance;
-public:
-    std::vector<int> getInfo(Position location, Map& world, char direction);
-};
-
-class ThinkingCar: public Car
-{
-private:
+protected:
     TouchSensor touch;
     TemperatureSensor temp;
     HumiditySensor humidity;
@@ -88,7 +44,7 @@ private:
     RadarSensor radar;
     Map& world;
 public:
-    ThinkingCar(Position starting_position, Map &world, int max_speed=20) : Car(starting_position, max_speed), world(world) {};
+    Car(Position starting_position, Map &world, int max_speed=20) : BaseCar(starting_position, max_speed), world(world) {};
     bool getTouchInfo() noexcept;
     Map& getMapRef();
     int getHumidityInfo() noexcept;
@@ -97,3 +53,7 @@ public:
     std::vector<int> getRadarInfo() noexcept;
     std::vector<int> getAttributes() noexcept;
 };
+
+
+
+

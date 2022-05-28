@@ -5,7 +5,7 @@ void dataLoader::load_data() {
     char mark;
     for(auto& vector: map.getFieldContainer()){
         for(auto field: vector){
-            position = field.getLocation();
+            position = field.location;
             mark = getTexture(field);
 
             drawing += std::make_unique<DisplayTile>(DisplayTile(position, display, mark));
@@ -16,7 +16,7 @@ void dataLoader::load_data() {
 }
 
 char dataLoader::getTexture(Field& field){
-    if(field.getIsBarrier())
+    if(field.isBarrier)
         return 'X';
     else
         return  ' ';

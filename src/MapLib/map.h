@@ -4,21 +4,17 @@
 
 class Field
 {
-private:
+public:
     Position location;
-    bool isBarrier=false;
+    bool isBarrier;
     int humidity;
     int surface_condition;
-public:
-    Field() noexcept;
-    Field(Position location) noexcept;
-    Position getLocation() const noexcept;
-    bool getIsBarrier() const noexcept;
-    void setIsBarrier(bool barrier);
-    int getHumidity() const noexcept;
-    void setHumidity(int hum);
-    int getSurface_Condition() const noexcept;
-    void setSurface_Condition(int condition);
+    int temperature;
+
+    Field(Position location,  bool isBarrier,  int humidity, int surface_condition, int temperature):
+            location(location), isBarrier(isBarrier), humidity(humidity), surface_condition(surface_condition),
+            temperature(temperature){};
+
 };
 
 class Map
