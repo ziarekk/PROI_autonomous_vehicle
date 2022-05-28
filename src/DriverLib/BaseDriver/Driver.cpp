@@ -10,12 +10,13 @@ Driver::Driver() noexcept {
     this->speed = 1;
 }
 
-Driver::Driver(Position position, int maxSpeed, char direction, Position destination, vector<int> distances, vector<int> attributes) noexcept {
-    this->position = position;
-    this->direction = direction;
+Driver::Driver(Car &car, char direction, Position destination) noexcept {
+    vector<int> attributes = car.getAttributes();
+    this->position = car.getLocation();
+    this->direction = car.getDirection();
     this->destination = destination;
-    this->speed = maxSpeed;
-    this->wall_distances = distances;
+    this->speed = car.getMaxSpeed();
+    this->wall_distances = car.getRadarInfo();
     this->road_quality = attributes[0];
     this->temperature = attributes[1];
     this->humidity = attributes[2];

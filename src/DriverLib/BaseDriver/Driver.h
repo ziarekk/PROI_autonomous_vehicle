@@ -18,7 +18,7 @@ protected:
     void avoidWall(Car &car) noexcept;
 public:
     Driver() noexcept;
-    Driver(Position position, int maxSpeed, char direction, Position destination, std::vector<int> distances, std::vector<int> attributes) noexcept;
+    Driver(Car &car, char direction, Position destination) noexcept;
     void updatePosition(Car &car);
     Position getDestination() const noexcept;
     std::vector<int> getWallDistances() const noexcept;
