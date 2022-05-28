@@ -90,7 +90,7 @@ int SurfaceSensor::getInfo(Position location, Map& world) noexcept {
 std::vector<int> RadarSensor::getInfo(Position location, Map& world, char direction) {
     int x = location.x;
     int y = location.y;
-    int front; int left; int right;
+    int front, left, right;
     if (direction == 'n')
     {
         for (int i = y; i < world.getFieldContainer().size(); i++)
