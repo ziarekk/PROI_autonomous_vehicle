@@ -87,35 +87,35 @@ void Driver::navigate(Car &car) noexcept {
     }
     // X positioning
     if (position.x < destination.x) {
-        if (direction == 's') {
+        if (direction == 's' && wall_distances[1] > 1) {
             car.turnLeft();
         }
-        else if (direction != 'e') {
+        else if (direction != 'e' && wall_distances[2] > 1) {
             car.turnRight();
         }
     }
     else if (position.x > destination.x) {
-        if (direction == 's') {
+        if (direction == 's' && wall_distances[1] > 1) {
             car.turnRight();
         }
-        else if (direction != 'w') {
+        else if (direction != 'w' && wall_distances[2] > 1) {
             car.turnLeft();
         }
     }
     // Y positioning
     else if (position.y < destination.y) {
-        if (direction == 'e') {
+        if (direction == 'e' && wall_distances[2] > 1) {
             car.turnRight();
         }
-        else if (direction != 's') {
+        else if (direction != 's' && wall_distances[1] > 1) {
             car.turnLeft();
         }
     }
     else if (position.y > destination.y) {
-        if (direction == 'w') {
+        if (direction == 'w' && wall_distances[2] > 1) {
             car.turnRight();
         }
-        else if (direction != 'n') {
+        else if (direction != 'n' && wall_distances[1] > 1) {
             car.turnLeft();
         }
     }
