@@ -81,7 +81,7 @@ void Driver::navigate(Car &car) noexcept {
         return;
     }
     // avoid obstacle
-    if (wall_distances[0] < 3) {
+    if (wall_distances[0] == 1) {
         this->avoidWall(car);
         return;
     }

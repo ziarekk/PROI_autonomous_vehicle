@@ -56,12 +56,18 @@ int main() {
         Loader.load_data();
         drawUI.display();
 
+        std::cout << car.getDirection() << std::endl;
         driver.navigate(car);
         car.move();
+
         driver.updatePosition(car);
 
         drawUI += std::make_unique<DisplayTile>(DisplayTile(somePosition, cmdDisplay, ' '));
         drawUI.display();
+
+        std::cout << car.getDirection() << std::endl;
+        std::cout << std::endl;
+
         Sleep(1000);
         str += ch;
     }

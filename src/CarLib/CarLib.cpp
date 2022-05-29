@@ -57,6 +57,9 @@ Position BaseCar::getLocation() const noexcept{
 }
 
 void BaseCar::move() noexcept {
+    if (this->speed == 0) {
+        return;
+    }
     if (this->direction != 'n' && this->direction != 's') {
         if (this->direction == 'e') {
             this->location.x += 1;
