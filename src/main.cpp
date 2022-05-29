@@ -56,17 +56,17 @@ int main() {
         Loader.load_data();
         drawUI.display();
 
-        std::cout << car.getDirection() << std::endl;
+        drawUI += std::make_unique<DisplayTile>(DisplayTile(Position(25,25), cmdDisplay, ' '));
+        drawUI.display();
+        std::cout << car.getDirection();
+
         driver.navigate(car);
         car.move();
 
         driver.updatePosition(car);
 
-        drawUI += std::make_unique<DisplayTile>(DisplayTile(somePosition, cmdDisplay, ' '));
+        drawUI += std::make_unique<DisplayTile>(DisplayTile(Position(26,26), cmdDisplay, ' '));
         drawUI.display();
-
-        std::cout << car.getDirection() << std::endl;
-        std::cout << std::endl;
 
         Sleep(1000);
         str += ch;
