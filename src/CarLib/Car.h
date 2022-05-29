@@ -32,6 +32,7 @@ public:
     Position getLocation() const noexcept;
     BaseCar(Position starting_position, int max_speed=20) : location(starting_position), maxSpeed(max_speed) {};
     BaseCar() noexcept {};
+    void move() noexcept;
 };
 
 class Car: public BaseCar

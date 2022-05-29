@@ -1,13 +1,14 @@
-#include "Car.h"
+#include "CarLib/Car.h"
+#include "DriverLib/BaseDriver/Driver.h"
 #include "data_loader.h"
+
 
 int main() {
 
     Map map;
     Drawing drawUI;
     ConsoleDisplay cmdDisplay;
-    Position position(8,8);
-    Car car(position, map);
+    Car car(Position(8, 8), map);
     dataLoader Loader(drawUI, cmdDisplay, map, car);
 
 
@@ -47,19 +48,32 @@ int main() {
     Sleep(1000);
 
 
-    // move the car and display it 8 times
-    for(int i=8; i < 16; i++){
-        Position newPos(i,i);
-        car.setLocation(newPos);
+    //
+    Driver driver(car, car.getDirection(), Position(5, 5));
+    std::string str = "";
+    char ch;
+    while ((ch = std::cin.get()) != 27) {
         Loader.load_data();
         drawUI.display();
 
-        // take a break so we can look
+        driver.navigate(car);
+        car.move();
+        driver.updatePosition(car);
+
         drawUI += std::make_unique<DisplayTile>(DisplayTile(somePosition, cmdDisplay, ' '));
         drawUI.display();
         Sleep(1000);
-
+        str += ch;
     }
+    // for(int i=8; i < 16; i++){
+
+
+    //     // take a break so we can look
+    //     drawUI += std::make_unique<DisplayTile>(DisplayTile(somePosition, cmdDisplay, ' '));
+    //     drawUI.display();
+    //     Sleep(1000);
+
+    // }
 
     // wait for the interaction
     system("pause");

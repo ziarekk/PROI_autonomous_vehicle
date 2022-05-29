@@ -14,7 +14,6 @@ char Steering::getDirection() const noexcept {
     return direction;
 }
 void Steering::accelerate(int new_speed) {
-
     this->speed = std::min(new_speed, maxSpeed);
 }
 void Steering::turnLeft() noexcept {
@@ -32,6 +31,7 @@ void Steering::turnLeft() noexcept {
         }
     }
 }
+
 void Steering::turnRight() noexcept {
     char directions [4] {'n', 'e', 's', 'w'};
     for (int i=0; i<3; i++)
@@ -48,11 +48,31 @@ void Steering::turnRight() noexcept {
     }
 }
 
+
 void BaseCar::setLocation(Position loc) {
     this->location = loc;
 }
 Position BaseCar::getLocation() const noexcept{
     return location;
+}
+
+void BaseCar::move() noexcept {
+    if (this->direction != 'n' && this->direction != 's') {
+        if (this->direction == 'e') {
+            this->location.x += 1;
+        }
+        else {
+            this->location.x -= 1;
+        }
+    }
+    else {
+        if (this->direction == 'n') {
+            this->location.y -= 1;
+        }
+        else {
+            this->location.y += 1;
+        }
+    }
 }
 
 
