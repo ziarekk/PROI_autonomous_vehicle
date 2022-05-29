@@ -17,19 +17,8 @@ void Steering::accelerate(int new_speed) {
     this->speed = std::min(new_speed, maxSpeed);
 }
 void Steering::turnLeft() noexcept {
-    // char directions [4] {'n', 'e', 's', 'w'};
-    // for (int i=0; i<3; i++)
-    // {
-    //     if (directions[i] == direction)
-    //     {
-    //         i--;
-    //         if (i < 0)
-    //         {
-    //             i=3;
-    //         }
-    //         direction = directions[i];
-    //     }
-    // }
+
+    // TO CO BYŁO NIE DZIAŁAŁO
 
     if (direction == 'n') {
         this->direction = 'w';
@@ -46,19 +35,8 @@ void Steering::turnLeft() noexcept {
 }
 
 void Steering::turnRight() noexcept {
-    // char directions [4] {'n', 'e', 's', 'w'};
-    // for (int i=0; i<3; i++)
-    // {
-    //     if (directions[i] == direction)
-    //     {
-    //         i++;
-    //         if (i > 3)
-    //         {
-    //             i=0;
-    //         }
-    //         direction = directions[i];
-    //     }
-    // }
+
+    // TO CO BYŁO NIE DZIAŁAŁO
 
     if (direction == 'n') {
         this->direction = 'e';
