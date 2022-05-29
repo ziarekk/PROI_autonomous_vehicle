@@ -17,34 +17,60 @@ void Steering::accelerate(int new_speed) {
     this->speed = std::min(new_speed, maxSpeed);
 }
 void Steering::turnLeft() noexcept {
-    char directions [4] {'n', 'e', 's', 'w'};
-    for (int i=0; i<3; i++)
-    {
-        if (directions[i] == direction)
-        {
-            i--;
-            if (i < 0)
-            {
-                i=3;
-            }
-            direction = directions[i];
-        }
+    // char directions [4] {'n', 'e', 's', 'w'};
+    // for (int i=0; i<3; i++)
+    // {
+    //     if (directions[i] == direction)
+    //     {
+    //         i--;
+    //         if (i < 0)
+    //         {
+    //             i=3;
+    //         }
+    //         direction = directions[i];
+    //     }
+    // }
+
+    if (direction == 'n') {
+        this->direction = 'w';
+    }
+    else if (direction == 's') {
+        this->direction = 'e';
+    }
+    else if (direction == 'e') {
+        this->direction = 'n';
+    }
+    else if (direction == 'w') {
+        this->direction = 's';
     }
 }
 
 void Steering::turnRight() noexcept {
-    char directions [4] {'n', 'e', 's', 'w'};
-    for (int i=0; i<3; i++)
-    {
-        if (directions[i] == direction)
-        {
-            i++;
-            if (i > 3)
-            {
-                i=0;
-            }
-            direction = directions[i];
-        }
+    // char directions [4] {'n', 'e', 's', 'w'};
+    // for (int i=0; i<3; i++)
+    // {
+    //     if (directions[i] == direction)
+    //     {
+    //         i++;
+    //         if (i > 3)
+    //         {
+    //             i=0;
+    //         }
+    //         direction = directions[i];
+    //     }
+    // }
+
+    if (direction == 'n') {
+        this->direction = 'e';
+    }
+    else if (direction == 's') {
+        this->direction = 'w';
+    }
+    else if (direction == 'e') {
+        this->direction = 's';
+    }
+    else if (direction == 'w') {
+        this->direction = 'n';
     }
 }
 
