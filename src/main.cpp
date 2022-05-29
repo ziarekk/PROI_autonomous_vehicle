@@ -37,6 +37,10 @@ int main() {
 
     }
 
+    //add obstacle
+    Field tmpField2(Position(5,6), true, 0, 0, 0);
+    map.setField(tmpField2);
+
     // load data from map&car and display it
     Loader.load_data();
     drawUI.display();
@@ -52,13 +56,14 @@ int main() {
     Driver driver(car, car.getDirection(), Position(5, 5));
     std::string str = "";
     char ch;
-    while ((ch = std::cin.get()) != 27) {
+    while ((ch = std::cin.get()) != 's') {
         Loader.load_data();
         drawUI.display();
 
-        drawUI += std::make_unique<DisplayTile>(DisplayTile(Position(25,25), cmdDisplay, ' '));
+        drawUI += std::make_unique<DisplayTile>(DisplayTile(Position(5,25), cmdDisplay, ' '));
         drawUI.display();
-        std::cout << car.getDirection();
+        std::cout << car.getDirection()<<" distance:";
+        std::cout << car.getRadarInfo()[0];
 
         driver.navigate(car);
         car.move();
