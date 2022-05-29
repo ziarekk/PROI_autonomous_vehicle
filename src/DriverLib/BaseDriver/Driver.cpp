@@ -95,10 +95,10 @@ void Driver::navigate(Car &car) noexcept {
         }
     }
     else if (position.x > destination.x) {
-        if (direction == 's' && wall_distances[1] > 1) {
+        if (direction == 's' && wall_distances[2] > 1) {
             car.turnRight();
         }
-        else if (direction != 'w' && wall_distances[2] > 1) {
+        else if (direction != 'w' && wall_distances[1] > 1) {
             car.turnLeft();
         }
     }
