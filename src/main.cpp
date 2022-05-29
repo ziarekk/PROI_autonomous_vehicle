@@ -8,7 +8,7 @@ int main() {
     Map map;
     Drawing drawUI;
     ConsoleDisplay cmdDisplay;
-    Car car(Position(8, 8), map);
+    Car car(Position(11, 11), map);
     dataLoader Loader(drawUI, cmdDisplay, map, car);
 
 
@@ -38,8 +38,18 @@ int main() {
     }
 
     //add obstacle
-    Field tmpField2(Position(5,6), true, 0, 0, 0);
-    map.setField(tmpField2);
+    map.setField(Field(Position(5,6), true, 0, 0, 0));
+    map.setField(Field(Position(6,6), true, 0, 0, 0));
+    map.setField(Field(Position(7,9), true, 0, 0, 0));
+    map.setField(Field(Position(8,8), true, 0, 0, 0));
+    map.setField(Field(Position(10,5), true, 0, 0, 0));
+    map.setField(Field(Position(10,10), true, 0, 0, 0));
+    map.setField(Field(Position(5,8), true, 0, 0, 0));
+    map.setField(Field(Position(5,10), true, 0, 0, 0));
+    map.setField(Field(Position(6,11), true, 0, 0, 0));
+
+
+
 
     // load data from map&car and display it
     Loader.load_data();
@@ -64,6 +74,8 @@ int main() {
         drawUI.display();
         std::cout << car.getDirection()<<" distance:";
         std::cout << car.getRadarInfo()[0];
+        std::cout <<" "<< car.getRadarInfo()[1];
+        std::cout <<" "<< car.getRadarInfo()[2]<<"         ";
 
         driver.navigate(car);
         car.move();
