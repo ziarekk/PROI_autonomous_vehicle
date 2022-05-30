@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include "Position.h"
+#include <string>
 
 class Field
 {
@@ -24,6 +25,9 @@ private:
 public:
     Map() noexcept;
     void setField(Field square);
+    void setFieldContainer(std::vector<std::vector<Field>> new_map);
     std::vector<std::vector<Field>> getFieldContainer() const noexcept;
     Field operator()(Position location) const noexcept;
 };
+
+std::vector<std::vector<Field>> read_to_map(std::string fileName);
