@@ -24,13 +24,14 @@ class BaseCar: public Steering
 {
 protected:
     Position location;
+    char direction;
     int maxSpeed=20;
     std::vector<Sensor> list_of_sensors;
 
 public:
     void setLocation(Position loc);
     Position getLocation() const noexcept;
-    BaseCar(Position starting_position, int max_speed=20) : location(starting_position), maxSpeed(max_speed) {};
+    BaseCar(Position starting_position, char direction='n', int max_speed=20) : location(starting_position), direction(direction), maxSpeed(max_speed) {};
     BaseCar() noexcept {};
     void move() noexcept;
 };
@@ -44,9 +45,11 @@ protected:
     SurfaceSensor condition;
     RadarSensor radar;
     Map& world;
+    char direction;
 public:
-    Car(Position starting_position, Map &world, int max_speed=20) : BaseCar(starting_position, max_speed), world(world) {};
+    Car(Position starting_position, Map &world, char direction='n', int max_speed=20) : BaseCar(starting_position, direction, max_speed), world(world) {};
     bool getTouchInfo() noexcept;
+    void setDirection(char dir) noexcept;
     Map& getMapRef();
     int getHumidityInfo() noexcept;
     int getSurfaceCondition() noexcept;
