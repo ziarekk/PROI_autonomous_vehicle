@@ -45,7 +45,6 @@ protected:
     SurfaceSensor condition;
     RadarSensor radar;
     Map& world;
-    // char direction;
 public:
     Car(Position starting_position, Map &world, char direction='n', int max_speed=20) : BaseCar(starting_position, direction, max_speed), world(world) {};
     bool getTouchInfo() noexcept;

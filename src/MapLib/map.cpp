@@ -18,6 +18,10 @@ Map::Map(int width, int height) {
     }
 }
 
+Map::Map(std::string fileName) {
+    this->read_from_file(fileName);
+}
+
 void Map::setField(Field square) {
     Position v = square.location;
     field_container[v.x][v.y] = square;
@@ -35,20 +39,14 @@ Field Map::operator()(Position location) const noexcept {
     return field_container[location.x][location.y];
 }
 
-// format to:
-// (true/false, humidity, surface_condition, temperature) (true/false, humidity, surface_condition, temperature)
-// (true/false, humidity, surface_condition, temperature) (true/false, humidity, surface_condition, temperature)
-
-std::vector<std::vector<Field>> read_to_map(std::string fileName)
+void Map::read_from_file(std::string fileName)
 {
-    Map map;
     std::string line;
     std::ifstream myFile;
     myFile.open(fileName, std::ios::in);
     if (myFile.is_open())
     {
         int i=0;
-        std::vector<std::vector<Field>> outside;
         while (getline(myFile, line))
         {
             int pos1=0;
@@ -83,10 +81,9 @@ std::vector<std::vector<Field>> read_to_map(std::string fileName)
                 inside.push_back(field);
                 j++;
             }
-            outside.push_back(inside);
+            field_container.push_back(inside);
             i++;
         }
         myFile.close();
-        return outside;
     }
 }

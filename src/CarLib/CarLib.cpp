@@ -17,9 +17,6 @@ void Steering::accelerate(int new_speed) {
     this->speed = std::min(new_speed, maxSpeed);
 }
 void Steering::turnLeft() noexcept {
-
-    // TO CO BYŁO NIE DZIAŁAŁO
-
     if (direction == 'n') {
         this->direction = 'w';
     }
@@ -35,9 +32,6 @@ void Steering::turnLeft() noexcept {
 }
 
 void Steering::turnRight() noexcept {
-
-    // TO CO BYŁO NIE DZIAŁAŁO
-
     if (direction == 'n') {
         this->direction = 'e';
     }
