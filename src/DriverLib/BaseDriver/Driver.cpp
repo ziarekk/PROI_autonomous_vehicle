@@ -63,15 +63,15 @@ int Driver::getHumidity() const noexcept {
 }
 
 void Driver::avoidWall(Car &car) noexcept {
-        int left = this->wall_distances[1];
-        int right = this->wall_distances[2];
-        if (left > right) {
-            car.turnLeft();
-        }
-        else {
-            car.turnRight();
-        }
+    int left = this->wall_distances[1];
+    int right = this->wall_distances[2];
+    if (left > right) {
+        car.turnLeft();
     }
+    else {
+        car.turnRight();
+    }
+}
 
 void Driver::navigate(Car &car) noexcept {
     // destination reached

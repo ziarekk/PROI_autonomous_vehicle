@@ -87,6 +87,11 @@ void BaseCar::move() noexcept {
 Map& Car::getMapRef() {
     return world;
 }
+
+void Car::setDirection(char dir) noexcept {
+    this->direction = dir;
+}
+
 bool Car::getTouchInfo() noexcept {
     return touch.getIsTouched(location, world);
 }
@@ -105,8 +110,8 @@ std::vector<int> Car::getRadarInfo() noexcept {
 }
 std::vector<int> Car::getAttributes() noexcept {
     std::vector<int> attributes;
+    attributes.push_back(condition.getInfo(this->getLocation(), world));
     attributes.push_back(temp.getInfo(this->getLocation(), world));
     attributes.push_back(humidity.getInfo(this->getLocation(), world));
-    attributes.push_back(condition.getInfo(this->getLocation(), world));
     return attributes;
 }

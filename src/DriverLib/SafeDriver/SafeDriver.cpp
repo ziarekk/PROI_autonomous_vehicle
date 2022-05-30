@@ -45,11 +45,11 @@ void SafeDriver::calculateSpeed(Car &car) noexcept {
     else if (temperature < 0) {
         this->speed *= 0.7;
     }
-    if (humidity > 80 && this->speed > 50) {
+    if (humidity > 80 && humidity <= 90) {
         this->speed *= 0.8;
     }
     else if (humidity > 90) {
-        this->speed *= 0.7;
+        this->speed *= 0.6;
     }
     car.accelerate(this->speed);
 }

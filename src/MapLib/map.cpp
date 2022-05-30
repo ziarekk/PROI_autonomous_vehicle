@@ -11,7 +11,7 @@ Map::Map(int width, int height) {
         std::vector<Field> inside;
         for (int j = 0; j < height; j++)
         {
-            Field field(Position(i, j), false, 0, 0, 0);
+            Field field(Position(i, j), false, 60, 10, 20);
             inside.push_back(field);
         }
         field_container.push_back(inside);
