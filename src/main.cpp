@@ -49,8 +49,6 @@ int main() {
     map.setField(Field(Position(6,11), true, 0, 0, 0));
 
 
-
-
      //load data from map&car and display it
     Loader.load_data();
     drawUI.display();
@@ -60,7 +58,6 @@ int main() {
     drawUI += std::make_unique<DisplayTile>(DisplayTile(somePosition, cmdDisplay, ' '));
     drawUI.display();
     Sleep(1000);
-
 
 
     Driver driver(car, Position(5, 5));
@@ -88,15 +85,7 @@ int main() {
         Sleep(1000);
         str += ch;
     }
-     for(int i=8; i < 16; i++){
-
-         // take a break so we can look
-         drawUI += std::make_unique<DisplayTile>(DisplayTile(somePosition, cmdDisplay, ' '));
-         drawUI.display();
-         Sleep(1000);
-
-     }
-
+     \
     system("pause");
     return 0;
 }
