@@ -1,7 +1,8 @@
+#pragma once
 #include "displays.h"
 #include <windows.h>
 #include <iostream>
-#include <memory>
+
 
 class ConsoleDisplay: public Display{
 public:

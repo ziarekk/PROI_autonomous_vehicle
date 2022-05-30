@@ -1,4 +1,5 @@
 #include "objects.h"
+#include <memory>
 
 class Drawing{
     std::vector<std::unique_ptr<Object>> objects;

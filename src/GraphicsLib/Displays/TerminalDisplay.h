@@ -1,3 +1,4 @@
+#pragma once
 #include "displays.h"
 #include <stdio.h>
 

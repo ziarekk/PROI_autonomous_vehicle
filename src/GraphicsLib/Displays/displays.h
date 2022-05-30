@@ -1,6 +1,6 @@
 #pragma once
-#include "map.h"
-#include "car.h"
+#include "../MapLib/map.h"
+#include "../CarLib/Car.h"
 
 class Display{
 public:
