@@ -1,8 +1,5 @@
 #include <gtest/gtest.h>
 #include "Driver.h"
-#include "../CarLib/Car.h"
-#include "../MapLib/Position.h"
-#include "../MapLib/map.h"
 
 using namespace std;
 
@@ -32,8 +29,8 @@ void createMap(Map &map) {
 
 TEST(Driver, Constructor)
 {
-    Map map;
-    createMap(map);
+    Map map(20,20);
+    //createMap(map);
     Car car(Position(5, 5), map);
     Driver dv(car, Position(8, 8));
 

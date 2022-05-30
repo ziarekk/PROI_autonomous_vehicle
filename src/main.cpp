@@ -8,7 +8,7 @@ int main() {
     Map map(20,20);
     Drawing drawUI;
     ConsoleDisplay cmdDisplay;
-    Car car(Position(0, 0), map);
+    Car car(Position(11, 11), map);
     dataLoader Loader(drawUI, cmdDisplay, map, car);
 
 
@@ -54,7 +54,7 @@ int main() {
     drawUI.display();
 
      //take a break so we can look
-    Position somePosition(10, 10);
+    Position somePosition(25, 25);
     drawUI += std::make_unique<DisplayTile>(DisplayTile(somePosition, cmdDisplay, ' '));
     drawUI.display();
     Sleep(1000);
@@ -85,7 +85,7 @@ int main() {
         Sleep(1000);
         str += ch;
     }
-     \
+
     system("pause");
     return 0;
 }
