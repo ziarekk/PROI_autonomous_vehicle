@@ -34,7 +34,7 @@ void createMap(Map &map) {
 
 TEST(SafeDriver, Constructor)
 {
-    Map map;
+    Map map(20,20);
     createMap(map);
     Car car(Position(5, 5), map);
     SafeDriver dv(car, Position(8, 8));
@@ -48,7 +48,7 @@ TEST(SafeDriver, Constructor)
 
 TEST(SafeDriver, calculateSpeed_bad_road)
 {
-    Map map;
+    Map map(20,20);
     createMap(map);
     map.setField(Field(Position(5, 5), true, 50, 4, 20));
     Car car(Position(5, 5), map);
@@ -61,7 +61,7 @@ TEST(SafeDriver, calculateSpeed_bad_road)
 
 TEST(SafeDriver, calculateSpeed_temp_0)
 {
-    Map map;
+    Map map(20,20);
     createMap(map);
     map.setField(Field(Position(5, 5), true, 50, 10, 0));
     Car car(Position(5, 5), map);
@@ -72,7 +72,7 @@ TEST(SafeDriver, calculateSpeed_temp_0)
 
 TEST(SafeDriver, calculateSpeed_temp_minus)
 {
-    Map map;
+    Map map(20,20);
     createMap(map);
     map.setField(Field(Position(5, 5), true, 50, 10, -5));
     Car car(Position(5, 5), map);
@@ -83,7 +83,7 @@ TEST(SafeDriver, calculateSpeed_temp_minus)
 
 TEST(SafeDriver, calculateSpeed_high_hum)
 {
-    Map map;
+    Map map(20,20);
     createMap(map);
     map.setField(Field(Position(5, 5), true, 82, 10, 15));
     Car car(Position(5, 5), map);
@@ -94,7 +94,7 @@ TEST(SafeDriver, calculateSpeed_high_hum)
 
 TEST(SafeDriver, calculateSpeed_very_high_hum)
 {
-    Map map;
+    Map map(20,20);
     createMap(map);
     map.setField(Field(Position(5, 5), true, 95, 10, 15));
     Car car(Position(5, 5), map);
@@ -105,7 +105,7 @@ TEST(SafeDriver, calculateSpeed_very_high_hum)
 
 TEST(SafeDriver, calculateSpeed_difficult_conditions)
 {
-    Map map;
+    Map map(20,20);
     createMap(map);
     map.setField(Field(Position(5, 5), true, 82, 3, 0));
     Car car(Position(5, 5), map);
