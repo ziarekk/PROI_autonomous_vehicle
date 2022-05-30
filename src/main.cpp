@@ -2,6 +2,7 @@
 #include "DriverLib/BaseDriver/Driver.h"
 #include "GraphicsLib/data_loader.h"
 #include "GraphicsLib/Displays/ConsoleDisplay.h"
+#include "DriverLib/StupidDriver/StupidDriver.h"
 
 int main() {
 
@@ -49,40 +50,24 @@ int main() {
     map.setField(Field(Position(6,11), true, 0, 0, 0));
 
 
-     //load data from map&car and display it
+    //load data from map&car and display it
     Loader.load_data();
     drawUI.display();
 
-     //take a break so we can look
-    Position somePosition(25, 25);
-    drawUI += std::make_unique<DisplayTile>(DisplayTile(somePosition, cmdDisplay, ' '));
-    drawUI.display();
-    Sleep(1000);
-
-
-    Driver driver(car, Position(5, 5));
+    // main loop
+    // Driver driver(car, Position(5, 5));
+    StupidDriver driver(car);
     std::string str;
     char ch;
     while ((ch = std::cin.get()) != 's') {
         Loader.load_data();
+        drawUI += std::make_unique<DisplayTile>(DisplayTile(Position(1,25), cmdDisplay, ' '));
         drawUI.display();
-
-        drawUI += std::make_unique<DisplayTile>(DisplayTile(Position(5,25), cmdDisplay, ' '));
-        drawUI.display();
-        std::cout << car.getDirection()<<" distance:";
-        std::cout << car.getRadarInfo()[0];
-        std::cout <<" "<< car.getRadarInfo()[1];
-        std::cout <<" "<< car.getRadarInfo()[2]<<"         ";
 
         driver.navigate(car);
         car.move();
-
         driver.updatePosition(car);
 
-        drawUI += std::make_unique<DisplayTile>(DisplayTile(Position(26,26), cmdDisplay, ' '));
-        drawUI.display();
-
-        Sleep(1000);
         str += ch;
     }
 
