@@ -23,7 +23,8 @@ class Map
 private:
     std::vector<std::vector<Field>> field_container;
 public:
-    Map() noexcept;
+    Map() = default;
+    Map(int width, int height);
     void setField(Field square);
     void setFieldContainer(std::vector<std::vector<Field>> new_map);
     std::vector<std::vector<Field>> getFieldContainer() const noexcept;

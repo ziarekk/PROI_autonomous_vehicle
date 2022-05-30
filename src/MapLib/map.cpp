@@ -3,12 +3,13 @@
 #include <string>
 #include <fstream>
 #include <iostream>
+#include <utility>
 
-Map::Map() noexcept {
-    for (int i = 0; i < 20; i++)
+Map::Map(int width, int height) {
+    for (int i = 0; i < width; i++)
     {
         std::vector<Field> inside;
-        for (int j = 0; j < 20; j++)
+        for (int j = 0; j < height; j++)
         {
             Field field(Position(i, j), false, 0, 0, 0);
             inside.push_back(field);
@@ -23,7 +24,7 @@ void Map::setField(Field square) {
 }
 
 void Map::setFieldContainer(std::vector<std::vector<Field>> new_map) {
-    field_container = new_map;
+    field_container = std::move(new_map);
 }
 
 std::vector<std::vector<Field>> Map::getFieldContainer() const noexcept {
