@@ -1,33 +1,37 @@
 #include <vector>
 #include "Driver.h"
-#include "../CarExample/Car.h"
-#include "../CarExample/Position.h"
+#include "../CarLib/Car.h"
+#include "../MapLib/Position.h"
 
 using namespace std;
 
 Driver::Driver() noexcept {
     this->position = Position();
-    this->speed = 50;
+    this->speed = 1;
 }
 
-Driver::Driver(Position position, char direction, Position destination, vector<int> distances, vector<int> attributes) noexcept {
-    this->position = position;
-    this->direction = direction;
+Driver::Driver(Car &car, Position destination) noexcept {
+    vector<int> attributes = car.getAttributes();
+    this->position = car.getLocation();
+    this->direction = car.getDirection();
     this->destination = destination;
-    this->speed = 50;
-    this->wall_distances = distances;
+    this->speed = car.getMaxSpeed();
+    this->wall_distances = car.getRadarInfo();
     this->road_quality = attributes[0];
     this->temperature = attributes[1];
     this->humidity = attributes[2];
+    car.accelerate(this->speed);
 }
 
-void Driver::updatePosition(Position new_position, char new_direction, std::vector<int> new_distances, std::vector<int> new_attributes) {
-    this->position = new_position;
-    this->direction = new_direction;
-    this->wall_distances = new_distances;
-    this->road_quality = new_attributes[0];
-    this->temperature = new_attributes[1];
-    this->humidity = new_attributes[2];
+void Driver::updatePosition(Car &car) {
+    vector<int> attributes = car.getAttributes();
+    this->position = car.getLocation();
+    this->direction = car.getDirection();
+    this->wall_distances = car.getRadarInfo();
+    this->road_quality = attributes[0];
+    this->temperature = attributes[1];
+    this->humidity = attributes[2];
+    car.accelerate(this->speed);
 }
 
 Position Driver::getDestination() const noexcept {
@@ -73,44 +77,45 @@ void Driver::navigate(Car &car) noexcept {
     // destination reached
     if (position == destination) {
         this->speed = 0;
+        car.accelerate(this->speed);
         return;
     }
     // avoid obstacle
-    if (wall_distances[0] < 3) {
+    if (wall_distances[0] == 1) {
         this->avoidWall(car);
         return;
     }
     // X positioning
     if (position.x < destination.x) {
-        if (direction == 's') {
+        if (direction == 's' && wall_distances[1] > 1) {
             car.turnLeft();
         }
-        else if (direction != 'e') {
+        else if (direction != 'e' && wall_distances[2] > 1) {
             car.turnRight();
         }
     }
     else if (position.x > destination.x) {
-        if (direction == 's') {
+        if (direction == 's' && wall_distances[2] > 1) {
             car.turnRight();
         }
-        else if (direction != 'w') {
+        else if (direction != 'w' && wall_distances[1] > 1) {
             car.turnLeft();
         }
     }
     // Y positioning
     else if (position.y < destination.y) {
-        if (direction == 'e') {
+        if (direction == 'e' && wall_distances[2] > 1) {
             car.turnRight();
         }
-        else if (direction != 's') {
+        else if (direction != 's' && wall_distances[1] > 1) {
             car.turnLeft();
         }
     }
     else if (position.y > destination.y) {
-        if (direction == 'w') {
+        if (direction == 'w' && wall_distances[2] > 1) {
             car.turnRight();
         }
-        else if (direction != 'n') {
+        else if (direction != 'n' && wall_distances[1] > 1) {
             car.turnLeft();
         }
     }

@@ -1,52 +1,55 @@
 #include <iostream>
 #include <vector>
 #include "SafeDriver.h"
-#include "../CarExample/Position.h"
+#include "../MapLib/Position.h"
 
 using namespace std;
 
 SafeDriver::SafeDriver() noexcept {
     this->position = Position();
-    this->speed = 50;
+    this->speed = 0;
 }
 
-SafeDriver::SafeDriver(Position position, char direction, Position destination, vector<int> distances, vector<int> attributes) noexcept {
-    this->position = position;
-    this->direction = direction;
+SafeDriver::SafeDriver(Car &car, Position destination) noexcept {
+    vector<int> attributes = car.getAttributes();
+    this->position = car.getLocation();
+    this->direction = car.getDirection();
     this->destination = destination;
-    this->wall_distances = distances;
+    this->speed = car.getMaxSpeed();
+    this->wall_distances = car.getRadarInfo();
     this->road_quality = attributes[0];
     this->temperature = attributes[1];
     this->humidity = attributes[2];
-    this->calculateSpeed();
+    this->calculateSpeed(car);
 }
 
-void SafeDriver::updatePosition(Position new_position, char new_direction, vector<int> new_distances, vector<int> new_attributes) noexcept {
-    this->position = new_position;
-    this->direction = new_direction;
-    this->wall_distances = new_distances;
-    this->road_quality = new_attributes[0];
-    this->temperature = new_attributes[1];
-    this->humidity = new_attributes[2];
-    this->calculateSpeed();
+void SafeDriver::updatePosition(Car &car) noexcept {
+    vector<int> attributes = car.getAttributes();
+    this->position = car.getLocation();
+    this->direction = car.getDirection();
+    this->wall_distances = car.getRadarInfo();
+    this->speed = car.getMaxSpeed();
+    this->road_quality = attributes[0];
+    this->temperature = attributes[1];
+    this->humidity = attributes[2];
+    this->calculateSpeed(car);
 }
 
-void SafeDriver::calculateSpeed() noexcept {
-    int actual = 150;
+void SafeDriver::calculateSpeed(Car &car) noexcept {
     if (road_quality < 5) {
-        actual /= 2;
+        this->speed /= 2;
     }
     if (temperature == 0) {
-        actual *= 0.9;
+        this->speed *= 0.9;
     }
     else if (temperature < 0) {
-        actual *= 0.7;
+        this->speed *= 0.7;
     }
-    if (humidity > 80 && actual > 50) {
-        actual *= 0.8;
+    if (humidity > 80 && this->speed > 50) {
+        this->speed *= 0.8;
     }
     else if (humidity > 90) {
-        actual *= 0.7;
+        this->speed *= 0.7;
     }
-    this->speed = actual;
+    car.accelerate(this->speed);
 }

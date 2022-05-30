@@ -4,7 +4,7 @@
 #include "../CarLib/Car.h"
 #include "../MapLib/Position.h"
 
-class Driver
+class DriverModel
 {
 protected:
     Position position;
@@ -17,8 +17,8 @@ protected:
     int humidity;
     void avoidWall(Car &car) noexcept;
 public:
-    Driver() noexcept;
-    Driver(Car &car, Position destination) noexcept;
+    DriverModel() noexcept;
+    DriverModel(Car &car, Position destination) noexcept;
     void updatePosition(Car &car);
     Position getDestination() const noexcept;
     std::vector<int> getWallDistances() const noexcept;

@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.11.0)
-project(my_project)
+project(209.x-pojazd-autonomiczny)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
