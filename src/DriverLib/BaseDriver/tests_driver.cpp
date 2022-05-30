@@ -30,7 +30,7 @@ void createMap(Map &map) {
 TEST(Driver, Constructor)
 {
     Map map(20,20);
-    //createMap(map);
+    createMap(map);
     Car car(Position(5, 5), map);
     Driver dv(car, Position(8, 8));
 
@@ -43,7 +43,7 @@ TEST(Driver, Constructor)
 
 TEST(Driver, updatePos)
 {
-    Map map;
+    Map map(20,20);
     createMap(map);
     map.setField(Field(Position(5,6), true, 10, 20, 50));
     Car car(Position(5, 5), map);
@@ -57,7 +57,7 @@ TEST(Driver, updatePos)
 
 TEST(Driver, navigate_end)
 {
-    Map map;
+    Map map(20,20);
     createMap(map);
     Car car(Position(5, 5), map);
     Driver dv(car, Position(5, 5));
@@ -68,7 +68,7 @@ TEST(Driver, navigate_end)
 
 TEST(Driver, navigate_turnLeft_v1)
 {
-    Map map;
+    Map map(20,20);
     createMap(map);
     Car car(Position(5, 5), map);
     Driver dv(car, Position(4, 5));
@@ -81,7 +81,7 @@ TEST(Driver, navigate_turnLeft_v1)
 
 TEST(Driver, navigate_turnLeft_v2)
 {
-    Map map;
+    Map map(20,20);
     createMap(map);
     Car car(Position(5, 5), map, 's');
     Driver dv(car, Position(7, 5));
@@ -93,7 +93,7 @@ TEST(Driver, navigate_turnLeft_v2)
 
 TEST(Driver, navigate_turnRight_v1)
 {
-    Map map;
+    Map map(20,20);
     createMap(map);
     Car car(Position(5, 5), map, 's');
     Driver dv(car, Position(3, 6));
@@ -105,7 +105,7 @@ TEST(Driver, navigate_turnRight_v1)
 
 TEST(Driver, navigate_turnRight_v2)
 {
-    Map map;
+    Map map(20,20);
     createMap(map);
     Car car(Position(5, 5), map, 'n');
     Driver dv(car, Position(8, 8));
@@ -117,7 +117,7 @@ TEST(Driver, navigate_turnRight_v2)
 
 TEST(Driver, navigate_noChange_v1)
 {
-    Map map;
+    Map map(20,20);
     createMap(map);
     Car car(Position(5, 5), map, 'e');
     Driver dv(car, Position(8, 5));
@@ -129,7 +129,7 @@ TEST(Driver, navigate_noChange_v1)
 
 TEST(Driver, navigate_noChange_v2)
 {
-    Map map;
+    Map map(20,20);
     createMap(map);
     Car car(Position(5, 5), map, 'n');
     Driver dv(car, Position(5, 3));
@@ -141,7 +141,7 @@ TEST(Driver, navigate_noChange_v2)
 
 TEST(Driver, navigate_avoidWall_go_left)
 {
-    Map map;
+    Map map(20,20);
     createMap(map);
     map.setField(Field(Position(5,4), true, 10, 20, 50));
     Car car(Position(5, 5), map, 'n');
@@ -154,7 +154,7 @@ TEST(Driver, navigate_avoidWall_go_left)
 
 TEST(Driver, navigate_avoidWall_go_right)
 {
-    Map map;
+    Map map(20,20);
     createMap(map);
     map.setField(Field(Position(6,5), true, 10, 20, 50));
     Car car(Position(5, 5), map, 'e');
@@ -162,5 +162,5 @@ TEST(Driver, navigate_avoidWall_go_right)
 
     dv.navigate(car);
     dv.updatePosition(car);
-    ASSERT_EQ(car.getDirection(), 'n');
+    ASSERT_EQ(car.getDirection(), 's');
 }
