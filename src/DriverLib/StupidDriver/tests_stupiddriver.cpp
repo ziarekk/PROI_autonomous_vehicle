@@ -34,7 +34,7 @@ void createMap(Map &map) {
 
 TEST(StupidDriver, Constructor)
 {
-    Map map;
+    Map map(20,20);
     createMap(map);
     Car car(Position(5, 5), map);
     StupidDriver dv(car);
@@ -47,7 +47,7 @@ TEST(StupidDriver, Constructor)
 
 TEST(StupidDriver, changeDirection_left_v1)
 {
-    Map map;
+    Map map(20,20);
     createMap(map);
     Car car(Position(1, 1), map);
     StupidDriver dv(car);
@@ -59,7 +59,7 @@ TEST(StupidDriver, changeDirection_left_v1)
 
 TEST(StupidDriver, changeDirection_left_v2)
 {
-    Map map;
+    Map map(20,20);
     createMap(map);
     Car car(Position(18, 18), map, 'e');
     StupidDriver dv(car);
@@ -71,7 +71,7 @@ TEST(StupidDriver, changeDirection_left_v2)
 
 TEST(StupidDriver, changeDirection_right_v1)
 {
-    Map map;
+    Map map(20,20);
     createMap(map);
     Car car(Position(1, 18), map, 'w');
     StupidDriver dv(car);
@@ -83,7 +83,7 @@ TEST(StupidDriver, changeDirection_right_v1)
 
 // TEST(StupidDriver, changeDirection_right_v2)
 // {
-//     Map map;
+//     Map map(20,20);
 //     createMap(map);
 //     Car car(Position(18, 1), map, 'e');
 //     StupidDriver dv(car);
