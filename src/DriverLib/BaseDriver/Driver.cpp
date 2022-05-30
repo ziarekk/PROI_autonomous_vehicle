@@ -10,7 +10,7 @@ Driver::Driver() noexcept {
     this->speed = 1;
 }
 
-Driver::Driver(Car &car, char direction, Position destination) noexcept {
+Driver::Driver(Car &car, Position destination) noexcept {
     vector<int> attributes = car.getAttributes();
     this->position = car.getLocation();
     this->direction = car.getDirection();

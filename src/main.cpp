@@ -63,7 +63,7 @@ int main() {
 
 
     //
-    Driver driver(car, car.getDirection(), Position(5, 5));
+    Driver driver(car, Position(5, 5));
     std::string str = "";
     char ch;
     while ((ch = std::cin.get()) != 's') {
