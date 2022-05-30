@@ -1,4 +1,5 @@
-#include "displays.h"
+#include "ConsoleDisplay.h"
+
 
 static HANDLE out = GetStdHandle(STD_OUTPUT_HANDLE);
 

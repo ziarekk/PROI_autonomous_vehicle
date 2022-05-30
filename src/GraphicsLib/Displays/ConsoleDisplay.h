@@ -1,16 +1,7 @@
-#pragma once
+#include "displays.h"
 #include <windows.h>
 #include <iostream>
-#include <vector>
 #include <memory>
-#include "../MapLib/map.h"
-#include "../CarLib/car.h"
-
-class Display{
-public:
-    Display() = default;
-    virtual void drawPoint(Position coords, char character) = 0;
-};
 
 class ConsoleDisplay: public Display{
 public:
@@ -19,4 +10,3 @@ public:
     void drawPoint(Position coords, char character) override;
     static COORD ToCOORD(Position position);
 };
-
