@@ -67,4 +67,55 @@ namespace {
         ASSERT_EQ(24, map.getFieldContainer()[3][2].humidity);
         ASSERT_EQ(22, map.getFieldContainer()[1][3].temperature);
     }
+    TEST(MapUnitTest, MapMain) {
+        Map map1;
+        map1.read_from_file("map_1.txt");
+        ASSERT_EQ(20, map1.getFieldContainer().size());
+        for (int i=0; i<19; i++)
+            ASSERT_EQ(20, map1.getFieldContainer()[i].size());
+
+        Map map(20,20);
+        // fulfill map
+        for(int i=0; i<20; i++) {
+            if(i==0 || i==19)
+            {
+                for (int j = 0; j < 20; j++)
+                {
+                    Position position2(j,i);
+                    Field tmpField(position2, true, 0, 0, 0);
+                    map.setField(tmpField);
+                }
+            }
+            else
+            {
+                Position position2(0,i);
+                Field tmpField1(position2, true, 0, 0,0 );
+                map.setField(tmpField1);
+
+                Position position3(19,i);
+                Field tmpField2(position3, true, 0, 0, 0);
+                map.setField(tmpField2);
+
+            }
+
+        }
+
+        //add obstacle
+        map.setField(Field(Position(5,6), true, 0, 0, 0));
+        map.setField(Field(Position(6,6), true, 0, 0, 0));
+        map.setField(Field(Position(7,9), true, 0, 0, 0));
+        map.setField(Field(Position(8,8), true, 0, 0, 0));
+        map.setField(Field(Position(10,5), true, 0, 0, 0));
+        map.setField(Field(Position(10,10), true, 0, 0, 0));
+        map.setField(Field(Position(5,8), true, 0, 0, 0));
+        map.setField(Field(Position(5,10), true, 0, 0, 0));
+        map.setField(Field(Position(6,11), true, 0, 0, 0));
+        for (int i=0; i<19; i++)
+        {
+            for (int j=0; j<19; j++)
+            {
+                ASSERT_EQ(map.getFieldContainer()[i][j].isBarrier, map1.getFieldContainer()[i][j].isBarrier);
+            }
+        }
+    }
 }

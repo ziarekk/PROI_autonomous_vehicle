@@ -24,7 +24,7 @@ Map::Map(std::string fileName) {
 
 void Map::setField(Field square) {
     Position v = square.location;
-    field_container[v.x][v.y] = square;
+    field_container[v.y][v.x] = square;
 }
 
 void Map::setFieldContainer(std::vector<std::vector<Field>> new_map) {
@@ -36,7 +36,7 @@ std::vector<std::vector<Field>> Map::getFieldContainer() const noexcept {
 }
 
 Field Map::operator()(Position location) const noexcept {
-    return field_container[location.x][location.y];
+    return field_container[location.y][location.x];
 }
 
 void Map::read_from_file(std::string fileName)
