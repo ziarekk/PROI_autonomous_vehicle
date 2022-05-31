@@ -11,7 +11,7 @@ Map::Map(int width, int height) {
         std::vector<Field> inside;
         for (int j = 0; j < height; j++)
         {
-            Field field(Position(i, j), false, 60, 10, 20);
+            Field field(Position(j, i), false, 60, 10, 20);
             inside.push_back(field);
         }
         field_container.push_back(inside);
@@ -23,8 +23,7 @@ Map::Map(std::string fileName) {
 }
 
 void Map::setField(Field square) {
-    Position v = square.location;
-    field_container[v.y][v.x] = square;
+    field_container[square.location.y][square.location.x] = square;
 }
 
 void Map::setFieldContainer(std::vector<std::vector<Field>> new_map) {
@@ -76,7 +75,7 @@ void Map::read_from_file(std::string fileName)
                 surface = stoi(field_info.substr(0, field_info.find(delimiter)));
                 field_info.erase(0, field_info.find(delimiter)+2);
                 temp = stoi(field_info.substr(0, field_info.find(delimiter)));
-                Position pos(i, j);
+                Position pos(j, i);
                 Field field(pos, isBarBool, hum, surface, temp);
                 inside.push_back(field);
                 j++;
@@ -84,6 +83,7 @@ void Map::read_from_file(std::string fileName)
             field_container.push_back(inside);
             i++;
         }
+
         myFile.close();
     }
 }

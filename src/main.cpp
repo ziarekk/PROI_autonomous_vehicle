@@ -6,13 +6,15 @@
 
 int main() {
 
-    Map map(20,20);
+   // Map map(20,20);
+    Map map("map_1.txt");
     Drawing drawUI;
     ConsoleDisplay cmdDisplay;
     Car car(Position(11, 11), map);
     dataLoader Loader(drawUI, cmdDisplay, map, car);
 
 
+/*
     // fulfill map
     for(int i=0; i<20; i++) {
         if(i==0 || i==19)
@@ -49,14 +51,14 @@ int main() {
     map.setField(Field(Position(5,10), true, 0, 0, 0));
     map.setField(Field(Position(6,11), true, 0, 0, 0));
 
-
+*/
     //load data from map&car and display it
     Loader.load_data();
     drawUI.display();
 
     // main loop
-    // Driver driver(car, Position(5, 5));
-    StupidDriver driver(car);
+     Driver driver(car, Position(5, 5));
+    // StupidDriver driver(car);
     std::string str;
     char ch;
     while ((ch = std::cin.get()) != 's') {
