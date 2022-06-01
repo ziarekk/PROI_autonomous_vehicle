@@ -4,61 +4,67 @@
 #include "GraphicsLib/Displays/ConsoleDisplay.h"
 #include "DriverLib/StupidDriver/StupidDriver.h"
 
+Drawing drawUI;
+ConsoleDisplay cmdDisplay;
+int mapNumber=0;
+char driverType='X';
+std::string mapName;
+Position destinationPoint;
+Position startingPoint;
+
+void takeMapAndDriver(ConsoleDisplay& display, Drawing& drawing){
+    while(mapNumber > 3 || mapNumber < 1){
+        cmdDisplay.setPosition(display.ToCOORD(Position(0,0)));
+        std::cout<<"There are 3 available maps: map_1, map_2, map_3"<<std::endl;
+        std::cout<<"Type number of the map: ";
+        std::cin>>mapNumber;
+    }
+    while(driverType!='S' || driverType!='I'){
+        cmdDisplay.setPosition(display.ToCOORD(Position(2,0)));
+        std::cout<<"There are 2 available drivers: S - stupid, I - Intelligent"<<std::endl;
+        std::cout<<"Type the letter of the driver: ";
+        std::cin>>driverType;
+    }
+}
+
+void chooseMap(int mType)
+    {
+    if(mType== 1)
+        mapName = "map_1.txt";
+    else if(mType == 2)
+        mapName = "map_2.txt";
+    else
+        mapName = "map_2.txt";
+    }
+
+void takePoint(Map& map){
+
+}
+
 int main() {
 
-   // Map map(20,20);
-    Map map("map_1.txt");
-    Drawing drawUI;
-    ConsoleDisplay cmdDisplay;
-    Car car(Position(11, 11), map);
+
+
+    Map map(mapName);
+    Car car(startingPoint, map);
     dataLoader Loader(drawUI, cmdDisplay, map, car);
 
 
-/*
-    // fulfill map
-    for(int i=0; i<20; i++) {
-        if(i==0 || i==19)
-            {
-            for (int j = 0; j < 20; j++)
-                {
-                Position position2(j,i);
-                Field tmpField(position2, true, 0, 0, 0);
-                map.setField(tmpField);
-                }
-            }
-        else
-        {
-            Position position2(0,i);
-            Field tmpField1(position2, true, 0, 0,0 );
-            map.setField(tmpField1);
-
-            Position position3(19,i);
-            Field tmpField2(position3, true, 0, 0, 0);
-            map.setField(tmpField2);
-
-        }
-
+    // Initialize Driver
+    if(driverType=='S'){
+        StupidDriver driver(car);
+    } else {
+        Driver driver(car, destinationPoint);
     }
 
-    //add obstacle
-    map.setField(Field(Position(5,6), true, 0, 0, 0));
-    map.setField(Field(Position(6,6), true, 0, 0, 0));
-    map.setField(Field(Position(7,9), true, 0, 0, 0));
-    map.setField(Field(Position(8,8), true, 0, 0, 0));
-    map.setField(Field(Position(10,5), true, 0, 0, 0));
-    map.setField(Field(Position(10,10), true, 0, 0, 0));
-    map.setField(Field(Position(5,8), true, 0, 0, 0));
-    map.setField(Field(Position(5,10), true, 0, 0, 0));
-    map.setField(Field(Position(6,11), true, 0, 0, 0));
 
-*/
     //load data from map&car and display it
     Loader.load_data();
     drawUI.display();
 
     // main loop
-     Driver driver(car, Position(5, 5));
-    // StupidDriver driver(car);
+     // Driver driver(car, Position(5, 5));
+     StupidDriver driver(car);
     std::string str;
     char ch;
     while ((ch = std::cin.get()) != 's') {
