@@ -1,12 +1,31 @@
 #pragma once
 #include <iostream>
 #include <vector>
-#include "../BaseDriver/Driver.h"
+#include "../CarLib/Car.h"
+#include "../MapLib/Position.h"
 
 
-class StupidDriver : public Driver
+class StupidDriver
 {
+protected:
+    Position position;
+    std::vector<int> wall_distances;
+    char direction;
+    int speed;
+    int road_quality;
+    int temperature;
+    int humidity;
+    void avoidWall(Car &car) noexcept;
+
 public:
-    StupidDriver(Car &car) noexcept;
-    void navigate(Car &car) noexcept;
+    StupidDriver() noexcept;
+    StupidDriver(Car &car);
+    void updatePosition(Car &car) noexcept;
+    std::vector<int> getWallDistances() const noexcept;
+    char getDirection() const noexcept;
+    int getSpeed() const noexcept;
+    int getTemperature() const noexcept;
+    int getRoadQuality() const noexcept;
+    int getHumidity() const noexcept;
+    virtual void navigate(Car &car) noexcept;
 };
