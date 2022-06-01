@@ -55,16 +55,6 @@ Position takeDestinationPoint(ConsoleDisplay& display, Drawing& drawing, Map& ma
     return destinationPoint;
 }
 
-void clearConsole(ConsoleDisplay& display, Drawing& drawing){
-    for(int i=0; i<60; i++){
-        for(int j=0; j<60; j++){
-            drawing += std::make_unique<DisplayTile>(DisplayTile(Position(i,j), display, ' '));
-        }
-    }
-    drawing.display();
-}
-
-
 int main() {
     Drawing drawUI;
     ConsoleDisplay cmdDisplay;
@@ -82,49 +72,77 @@ int main() {
     Car car(startingPoint, map);
     dataLoader Loader(drawUI, cmdDisplay, map, car);
 
-    clearConsole(cmdDisplay, drawUI);
-
+    drawUI += std::make_unique<clearConsole>(clearConsole(70, 70, ' ', cmdDisplay));
+    drawUI.display();
     //load data from map&car and display it
     Loader.load_data();
     drawUI.display();
 
     std::string str;
 
+    Position footer(0, map.getFieldContainer().size());
+    Position footer2(0, map.getFieldContainer().size()+12);
 
     if(driverType == 'S')
         {
         StupidDriver driver(car);
         while (!(car.getLocation() == destinationPoint)) {
             Loader.load_data();
-            drawUI += std::make_unique<DisplayTile>(DisplayTile(Position(1,25), cmdDisplay, ' '));
+            drawUI += std::make_unique<DisplayTile>(DisplayTile(footer, cmdDisplay, ' '));
             drawUI.display();
+
+            std::cout<<std::endl<<"Current Position: ("<<car.getLocation().x<<","<< car.getLocation().y<<")   ";
+            std::cout<<std::endl<<"Destination: ("<<destinationPoint.x<<","<< destinationPoint.y<<")   ";
+            std::cout<<std::endl;
+            std::cout<<std::endl<<"Road quality: "<<car.getSurfaceCondition();
+            std::cout<<std::endl<<"Road temperature: "<<car.getTemperature();
+            std::cout<<std::endl<<"Road humidity: "<<car.getHumidityInfo();
+            std::cout<<std::endl;
+            std::cout<<std::endl<<"Wall distances: "<<std::endl;
+            std::cout<<"Front - "<<car.getRadarInfo()[0]<<";  Left - "<<car.getRadarInfo()[1];
+            std::cout<<";  Right - "<<car.getRadarInfo()[2]<<std::endl;
+
 
             driver.navigate(car);
             car.move();
             driver.updatePosition(car);
 
-            Sleep(500);
+            Sleep(1000);
             }
         Loader.load_data();
-        drawUI += std::make_unique<DisplayTile>(DisplayTile(Position(1,25), cmdDisplay, ' '));
+        drawUI += std::make_unique<DisplayTile>(DisplayTile(footer2, cmdDisplay, ' '));
         drawUI.display();
+        std::cout<<std::endl;
         }
+
     else {
         Driver driver(car, destinationPoint);
         while (!(car.getLocation() == destinationPoint)) {
             Loader.load_data();
-            drawUI += std::make_unique<DisplayTile>(DisplayTile(Position(1,25), cmdDisplay, ' '));
+            drawUI += std::make_unique<DisplayTile>(DisplayTile(footer, cmdDisplay, ' '));
             drawUI.display();
+            std::cout<<std::endl<<"Current Position: ("<<car.getLocation().x<<","<< car.getLocation().y<<")    ";
+            std::cout<<std::endl<<"Destination: ("<<destinationPoint.x<<","<< destinationPoint.y<<")   ";
+            std::cout<<std::endl;
+            std::cout<<std::endl<<"Road quality: "<<car.getSurfaceCondition()<<"          ";
+            std::cout<<std::endl<<"Road temperature: "<<car.getTemperature()<<"          ";
+            std::cout<<std::endl<<"Road humidity: "<<car.getHumidityInfo()<<"          ";
+            std::cout<<std::endl;
+            std::cout<<std::endl<<"Wall distances: "<<std::endl;
+            std::cout<<"Front - "<<car.getRadarInfo()[0]<<";  Left - "<<car.getRadarInfo()[1];
+            std::cout<<";  Right - "<<car.getRadarInfo()[2]<<"          "<<std::endl;
+
 
             driver.navigate(car);
             car.move();
             driver.updatePosition(car);
 
-            Sleep(500);
+            Sleep(1000);
         }
         Loader.load_data();
-        drawUI += std::make_unique<DisplayTile>(DisplayTile(Position(1,25), cmdDisplay, ' '));
+        drawUI += std::make_unique<DisplayTile>(DisplayTile(footer2, cmdDisplay, ' '));
         drawUI.display();
+        std::cout<<std::endl;
     }
 
     system("pause");

@@ -21,3 +21,11 @@ void DisplayLine::draw(){
             tmp.y++;
         }}
 }
+
+void clearConsole::draw(){
+    for(int i=0; i<length; i++){
+        for(int j=0; j<height; j++){
+            display.drawPoint(Position(i, j), character);
+        }
+    }
+}
