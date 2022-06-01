@@ -9,6 +9,7 @@ class Driver : public StupidDriver
 {
 protected:
     Position destination;
+    void avoidWall(Car &car) noexcept;
 
 public:
     Driver() : StupidDriver() {};
