@@ -38,3 +38,16 @@ public:
             Object(position, display), length(length), axis(axis), character(character) {};
     void draw() override;
 };
+
+class clearConsole: public Object{
+protected:
+    int length;
+    int height;
+    char character;
+public:
+    clearConsole(int length, int height,  char character, Display& display):
+    Object(Position(0,0), display), length(length), height(height), character(character) {};
+
+    void draw() override;
+
+};

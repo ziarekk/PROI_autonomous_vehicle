@@ -10,4 +10,5 @@ public:
     void setPosition(COORD coords);
     void drawPoint(Position coords, char character) override;
     static COORD ToCOORD(Position position);
+
 };
