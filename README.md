@@ -5,11 +5,17 @@
 
 
 ## Opis projektu
-Projekt zakłada stowerzenie aplikacji symulującej autonomiczny pojazd.
-Pojazd ma być zdolny do poruszania się po mapie za pomocą nadawanej mu prędkości.
-W najbardziej zaawansowanej wersji kierwoca autonomiczny ma rozpoznawać mapę i samodzielnie, bezkolizyjnie poruszać się po niej.
-Projekt zakłada dynamiczne/responsywne wyświetlanie grafiki.
+Projekt zakładał stworzenie aplikacji symulującej autonomiczny pojazd.<br/>
+Pojazd jest zdolny do poruszania się po wygenerowanej z pliku mapie.<br/>
+Obecnie, najbardziej zaawansowany Driver jest w stanie nawigować do zadanego mu na mapie celu.<br/>
+Obecnie pojazd autonomiczny jest w stanie rozwiązywać bardzo proste labirynty.<br/>
 
+## Sposób działania aplikacji main
+-> Należy odpalić aplikację main, w tym samym katalogu muszą znajdować się pliki map.
+-> Wybieramy mapę, przez wpisanie numeru od 1 do 3.
+-> Wybieramy kierowcę wpisując odpowiednio: 'I' - Inteligentny, 'S' - Głupi
+-> Wybieramy punkty startowy i docelowy, punkty muszą leżeć w obrębie mapy i nie mogą być przeszkodami!
+-> Pojazd będzie jeździł po mapie, aż nie dotrze do zadanego celu.
 
 ## Podział zadań
 **Moduł Kierowcy**  - Wojciech Łapacz<br/>
