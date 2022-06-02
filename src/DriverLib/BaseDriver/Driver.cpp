@@ -16,21 +16,27 @@ Position Driver::getDestination() const noexcept {
 void Driver::avoidWall(Car &car) noexcept {
     int left = this->wall_distances[1];
     int right = this->wall_distances[2];
-    int v = rand() % 2;
-    if (v == 0) {
-        if (left > 1) {
-            car.turnLeft();
-        }
-        else{
-            car.turnRight();
-        }
+    if (left == right == 1) {
+        car.turnRight();
+        car.turnRight();
     }
     else {
-        if (right > 1) {
-            car.turnRight();
+        int v = rand() % 2;
+        if (v == 0) {
+            if (left > 1) {
+                car.turnLeft();
+            }
+            else{
+                car.turnRight();
+            }
         }
-        else{
-            car.turnLeft();
+        else {
+            if (right > 1) {
+                car.turnRight();
+            }
+            else{
+                car.turnLeft();
+            }
         }
     }
 }
