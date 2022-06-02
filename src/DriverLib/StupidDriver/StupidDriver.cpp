@@ -63,7 +63,11 @@ int StupidDriver::getHumidity() const noexcept {
 void StupidDriver::avoidWall(Car &car) noexcept {
     int left = this->wall_distances[1];
     int right = this->wall_distances[2];
-    if (left > right) {
+    if (left == right == 1) {
+        this->speed = 0;
+        car.accelerate(this->speed);
+    }
+    else if (left > right) {
         car.turnLeft();
     }
     else {
