@@ -41,7 +41,7 @@ namespace {
         ASSERT_EQ(1, map(pos).surface_condition);
     }
     TEST(MapUnitTest, MapFileConstructor1) {
-        Map map("test_map.txt");
+        Map map("../src/UnitTests/test_map.txt");
         ASSERT_EQ(3, map.getFieldContainer().size());
         ASSERT_EQ(false, map.getFieldContainer()[0][0].isBarrier);
         ASSERT_EQ(20, map.getFieldContainer()[0][1].humidity);
@@ -49,14 +49,14 @@ namespace {
     }
     TEST(MapUnitTest, MapFileReader1) {
         Map map;
-        map.read_from_file("test_map.txt");
+        map.read_from_file("../src/UnitTests/test_map.txt");
         ASSERT_EQ(3, map.getFieldContainer().size());
         ASSERT_EQ(false, map.getFieldContainer()[0][0].isBarrier);
         ASSERT_EQ(20, map.getFieldContainer()[0][1].humidity);
         ASSERT_EQ(3, map.getFieldContainer()[2][2].temperature);
     }
     TEST(MapUnitTest, MapFileConstructor2) {
-        Map map("test1.txt");
+        Map map("../src/UnitTests/test1.txt");
         ASSERT_EQ(4, map.getFieldContainer().size());
         ASSERT_EQ(false, map.getFieldContainer()[1][1].isBarrier);
         ASSERT_EQ(24, map.getFieldContainer()[3][2].humidity);
@@ -65,7 +65,7 @@ namespace {
 
     TEST(MapUnitTest, MapFileReader2) {
         Map map;
-        map.read_from_file("test1.txt");
+        map.read_from_file("../src/UnitTests/test1.txt");
         ASSERT_EQ(4, map.getFieldContainer().size());
         ASSERT_EQ(true, map.getFieldContainer()[1][2].isBarrier);
         ASSERT_EQ(24, map.getFieldContainer()[3][2].humidity);
@@ -73,7 +73,7 @@ namespace {
     }
     TEST(MapUnitTest, MapMain) {
         Map map1;
-        map1.read_from_file("map_1.txt");
+        map1.read_from_file("../src/UnitTests/map_1.txt");
         ASSERT_EQ(20, map1.getFieldContainer().size());
         for (int i=0; i<19; i++)
             ASSERT_EQ(20, map1.getFieldContainer()[i].size());

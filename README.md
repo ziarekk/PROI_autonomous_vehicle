@@ -12,7 +12,7 @@ Aktualnie pojazd autonomiczny z inteligentnym kierowcą jest w stanie rozwiązyw
 <br/>
 
 ## Sposób działania aplikacji main
-- Należy odpalić aplikację main, w tym samym katalogu muszą znajdować się pliki map.<br/>
+- Należy odpalić aplikację main.<br/>
 - Wybieramy mapę, przez wpisanie numeru od 1 do 3.<br/>
 - Wybieramy kierowcę wpisując odpowiednio: 'I' - Inteligentny, 'S' - Głupi<br/>
 - Wybieramy punkty startowy i docelowy, punkty muszą leżeć w obrębie mapy i nie mogą być przeszkodami!<br/>

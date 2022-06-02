@@ -30,11 +30,11 @@ char takeDriver() {
 std::string chooseMap(int mType)
 {
     if(mType== 1)
-        return "map_1.txt";
+        return "../src/UnitTests/map_1.txt";
     else if(mType == 2)
-        return "map_2.txt";
+        return "../src/UnitTests/map_2.txt";
     else
-        return "map_3.txt";
+        return "../src/UnitTests/map_3.txt";
 }
 
 Position takeStartingPoint(Map& map) {

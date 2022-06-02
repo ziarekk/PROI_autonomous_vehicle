@@ -1,6 +1,6 @@
 #include "GraphicsLib/Menu_functions.h"
 #include "GraphicsLib/Displays/ConsoleDisplay.h"
-#include "../DriverLib/BaseDriver/Driver.h"
+#include "DriverLib/BaseDriver/Driver.h"
 #include "DriverLib/StupidDriver/StupidDriver.h"
 
 /*
@@ -48,7 +48,7 @@ int main() {
             car.move();
             driver.updatePosition(car);
 
-            Sleep(1000);
+            Sleep(100);
             }
         Loader.load_data();
         drawUI += std::make_unique<DisplayTile>(DisplayTile(footer, cmdDisplay, ' '));
@@ -69,7 +69,7 @@ int main() {
             car.move();
             driver.updatePosition(car);
 
-            Sleep(1000);
+            Sleep(100);
         }
         Loader.load_data();
         drawUI += std::make_unique<DisplayTile>(DisplayTile(footer, cmdDisplay, ' '));
