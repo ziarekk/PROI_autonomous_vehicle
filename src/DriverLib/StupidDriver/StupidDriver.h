@@ -4,6 +4,9 @@
 #include "../CarLib/Car.h"
 #include "../MapLib/Position.h"
 
+/*
+Autor: Wojciech Łapacz
+*/
 
 class StupidDriver
 {

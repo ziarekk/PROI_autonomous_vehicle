@@ -1,5 +1,9 @@
 #include "objects.h"
 
+/*
+Autor: Karol Ziarek
+*/
+
 void DisplayTile::draw(){
     display.drawPoint(position, character);
 }

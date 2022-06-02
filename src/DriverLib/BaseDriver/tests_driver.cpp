@@ -1,6 +1,10 @@
 #include <gtest/gtest.h>
 #include "Driver.h"
 
+/*
+Autor: Wojciech Łapacz
+*/
+
 using namespace std;
 
 void createMap(Map &map) {

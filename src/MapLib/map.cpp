@@ -5,6 +5,10 @@
 #include <iostream>
 #include <utility>
 
+/*
+Autor: Szymon Jankowski
+*/
+
 Map::Map(int width, int height) {
     for (int i = 0; i < width; i++)
     {

@@ -1,6 +1,10 @@
 #pragma once
 #include "Displays/displays.h"
 
+/*
+Autor: Karol Ziarek
+*/
+
 class Object{
 protected:
     Position position;

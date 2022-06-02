@@ -1,5 +1,9 @@
 #pragma once
 
+/*
+Autor: Wojciech Łapacz
+*/
+
 class Position
 {
 public:

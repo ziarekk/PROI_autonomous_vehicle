@@ -1,6 +1,10 @@
 #include <gtest/gtest.h>
 #include "Car.h"
 
+/*
+Autor: Szymon Jankowski
+*/
+
 namespace {
     TEST(CarUnitTest, getSpeedInfo1) {
         BaseCar car;

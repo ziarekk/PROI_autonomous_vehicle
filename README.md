@@ -13,9 +13,12 @@ Projekt zakłada dynamiczne/responsywne wyświetlanie grafiki.
 
 ## Podział zadań
 **Moduł Kierowcy**  - Wojciech Łapacz<br/>
-**Moduł Samochodu**  - Szymon Jankowski<br/>
+**Moduł Samochodu**  - Szymon Jankowski, poszczególne funkcje: Wojciech Łapacz i Karol Ziarek<br/>
 **Moduł Graficzny**  - Karol Ziarek<br/>
-**Świat/Mapa**  - realizacja wspólna / niedookreślono<br/>
+**Świat/Mapa**  - Szymon Jankowski, poprawki: Wojciech Łapacz i Karol Ziarek<br/>
+**Moduł main** - Karol Ziarek<br/>
+**Usprawnienia, struktura i łączenie modułów** - Wojciech Łapacz, Karol Ziarek<br/>
 
-## Aktulane postępy 
+## Aktulane postępy
+**Aktualna działająca wersja programu w branchu main**
 **Mapa myśli projektu:** https://app.creately.com/d/JovNBP3d3dS/edit

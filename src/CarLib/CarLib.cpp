@@ -1,6 +1,14 @@
 #include "Car.h"
 #include "../MapLib/Position.h"
 
+/*
+
+Autor: Szymon Jankowski
+
+Funkcja BaseCar::move(): Karol Ziarek, Wojciech Łapacz
+
+*/
+
 int Steering::getSpeed() const noexcept {
     return speed;
 }
@@ -75,8 +83,6 @@ void BaseCar::move() noexcept {
         }
     }
 }
-
-
 
 Map& Car::getMapRef() {
     return world;

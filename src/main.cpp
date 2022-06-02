@@ -3,6 +3,9 @@
 #include "../DriverLib/BaseDriver/Driver.h"
 #include "DriverLib/StupidDriver/StupidDriver.h"
 
+/*
+Autor: Karol Ziarek
+*/
 
 int main() {
     Drawing drawUI;

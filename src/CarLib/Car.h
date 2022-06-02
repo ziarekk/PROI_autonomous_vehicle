@@ -4,6 +4,14 @@
 #include "../MapLib/Position.h"
 #include "Sensor.h"
 
+/*
+
+Autor: Szymon Jankowski
+
+Funkcja BaseCar::move(): Karol Ziarek, Wojciech Łapacz
+
+*/
+
 class Steering
 {
 protected:

@@ -3,6 +3,10 @@
 #include "../CarLib/Car.h"
 #include "../MapLib/Position.h"
 
+/*
+Autor: Wojciech Łapacz
+*/
+
 using namespace std;
 
 Position Driver::getDestination() const noexcept {

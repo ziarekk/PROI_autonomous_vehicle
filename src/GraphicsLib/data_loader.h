@@ -1,6 +1,9 @@
 #pragma once
 #include "drawing.h"
 
+/*
+Autor: Karol Ziarek
+*/
 
 class dataLoader {
 private:

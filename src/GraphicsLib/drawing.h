@@ -1,6 +1,10 @@
 #include "objects.h"
 #include <memory>
 
+/*
+Autor: Karol Ziarek
+*/
+
 class Drawing{
     std::vector<std::unique_ptr<Object>> objects;
     std::vector<std::reference_wrapper<Object>> objectsReferences;

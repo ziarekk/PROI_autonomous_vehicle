@@ -1,5 +1,8 @@
 #include "ConsoleDisplay.h"
 
+/*
+Autor: Karol Ziarek
+*/
 
 static HANDLE out = GetStdHandle(STD_OUTPUT_HANDLE);
 

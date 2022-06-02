@@ -4,6 +4,10 @@
 #include "../BaseDriver/Driver.h"
 #include "../MapLib/Position.h"
 
+/*
+Autor: Wojciech Łapacz
+*/
+
 class SafeDriver : public Driver
 {
 protected:

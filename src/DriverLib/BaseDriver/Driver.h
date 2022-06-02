@@ -5,6 +5,10 @@
 #include "../CarLib/Car.h"
 #include "../MapLib/Position.h"
 
+/*
+Autor: Wojciech Łapacz
+*/
+
 class Driver : public StupidDriver
 {
 protected:

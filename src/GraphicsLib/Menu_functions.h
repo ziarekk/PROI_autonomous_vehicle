@@ -3,6 +3,10 @@
 #include "../CarLib/Car.h"
 #include "data_loader.h"
 
+/*
+Autor: Karol Ziarek
+*/
+
 int takeMap() {
     int mapNumber = 0;
     while (mapNumber > 3 || mapNumber < 1) {

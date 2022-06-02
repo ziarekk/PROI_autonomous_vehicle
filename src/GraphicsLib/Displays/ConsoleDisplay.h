@@ -3,6 +3,9 @@
 #include <windows.h>
 #include <iostream>
 
+/*
+Autor: Karol Ziarek
+*/
 
 class ConsoleDisplay: public Display{
 public:

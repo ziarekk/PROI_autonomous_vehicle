@@ -3,6 +3,10 @@
 #include "Position.h"
 #include <string>
 
+/*
+Autor: Szymon Jankowski
+*/
+
 class Field
 {
 public:

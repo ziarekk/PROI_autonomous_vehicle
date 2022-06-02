@@ -4,6 +4,10 @@
 #include "../MapLib/Position.h"
 #include "../MapLib/map.h"
 
+/*
+Autor: Wojciech Łapacz
+*/
+
 using namespace std;
 
 namespace

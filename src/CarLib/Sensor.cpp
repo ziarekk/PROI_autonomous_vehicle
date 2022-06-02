@@ -1,5 +1,13 @@
 #include "Sensor.h"
 
+/*
+
+Autor: Szymon Jankowski
+
+Funkcja getInfo(): Karol Ziarek & Wojciech Łapacz
+
+*/
+
 bool TouchSensor::getIsTouched(Position location, Map& map)  {
     int x = location.x;
     int y = location.y;

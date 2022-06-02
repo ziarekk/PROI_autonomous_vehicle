@@ -1,5 +1,9 @@
 #include "data_loader.h"
 
+/*
+Autor: Karol Ziarek
+*/
+
 void dataLoader::load_data() {
     Position position;
     char mark;

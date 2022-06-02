@@ -2,6 +2,10 @@
 #include "../MapLib/map.h"
 #include "../CarLib/Car.h"
 
+/*
+Autor: Karol Ziarek
+*/
+
 class Display{
 public:
     Display() = default;

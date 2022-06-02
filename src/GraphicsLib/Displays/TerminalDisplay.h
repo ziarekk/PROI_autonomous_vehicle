@@ -2,6 +2,10 @@
 #include "displays.h"
 #include <stdio.h>
 
+/*
+Autor: Karol Ziarek
+*/
+
 class TerminalDisplay: public Display{
 public:
     TerminalDisplay() = default;

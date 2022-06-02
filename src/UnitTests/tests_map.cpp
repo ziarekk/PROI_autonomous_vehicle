@@ -1,6 +1,10 @@
 #include "gtest/gtest.h"
 #include "map.h"
 
+/*
+Autor: Szymon Jankowski
+*/
+
 namespace {
     TEST(MapUnitTest, fieldConstruction) {
         Position pos(10, 2);

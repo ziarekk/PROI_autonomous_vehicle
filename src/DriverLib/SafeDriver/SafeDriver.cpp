@@ -3,6 +3,10 @@
 #include "SafeDriver.h"
 #include "../MapLib/Position.h"
 
+/*
+Autor: Wojciech Łapacz
+*/
+
 using namespace std;
 
 void SafeDriver::updatePosition(Car &car) noexcept {

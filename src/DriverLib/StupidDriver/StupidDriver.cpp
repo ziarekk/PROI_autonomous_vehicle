@@ -3,8 +3,11 @@
 #include "../CarLib/Car.h"
 #include "../MapLib/Position.h"
 
-using namespace std;
+/*
+Autor: Wojciech Łapacz
+*/
 
+using namespace std;
 
 StupidDriver::StupidDriver() noexcept {
     this->position = Position();

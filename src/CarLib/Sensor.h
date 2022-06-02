@@ -2,6 +2,14 @@
 #include "../MapLib/map.h"
 #include "../MapLib/Position.h"
 
+/*
+
+Autor: Szymon Jankowski
+
+Funkcja getInfo(): Karol Ziarek & Wojciech Łapacz
+
+*/
+
 class Sensor
 {
 public:
