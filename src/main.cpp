@@ -1,5 +1,5 @@
 #include "GraphicsLib/Menu_functions.h"
-#include "GraphicsLib/Displays/ConsoleDisplay.h"
+#include "GraphicsLib/Displays/WindowsTerminalDisplay.h"
 #include "DriverLib/BaseDriver/Driver.h"
 #include "DriverLib/StupidDriver/StupidDriver.h"
 
@@ -9,7 +9,7 @@ Autor: Karol Ziarek
 
 int main() {
     Drawing drawUI;
-    ConsoleDisplay cmdDisplay;
+    WindowsTerminalDisplay cmdDisplay;
 
     int mapNumber = takeMap();
     char driverType= takeDriver();
