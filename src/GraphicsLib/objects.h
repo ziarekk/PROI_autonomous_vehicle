@@ -1,6 +1,6 @@
 #pragma once
 #include "Displays/displays.h"
-
+#include "Displays/BmpDisplay.h"
 /*
 Autor: Karol Ziarek
 */
@@ -54,4 +54,16 @@ public:
 
     void draw() override;
 
+};
+
+class printBMP: public Object{
+protected:
+    BmpDisplay& bmpDisplay;
+public:
+    printBMP(BmpDisplay& bmpDisplay):
+        Object(Position(0,0), bmpDisplay), bmpDisplay(bmpDisplay){};
+
+    void draw() override{
+        bmpDisplay.generateImage();
+    };
 };

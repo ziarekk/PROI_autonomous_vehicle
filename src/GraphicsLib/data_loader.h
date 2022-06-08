@@ -16,5 +16,4 @@ public:
             drawing(drawing), display(display), map(map), car(car) {};
 
     void load_data();
-    char getTexture(Field& field);
 };
