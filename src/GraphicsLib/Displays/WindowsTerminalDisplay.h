@@ -7,11 +7,11 @@
 Autor: Karol Ziarek
 */
 
-class ConsoleDisplay: public Display{
+class WindowsTerminalDisplay: public Display{
 public:
-    ConsoleDisplay() = default;
+    WindowsTerminalDisplay() = default;
     void setPosition(COORD coords);
     void drawPoint(Position coords, char character) override;
     static COORD ToCOORD(Position position);
-
+    char getTexture(Field& field) override;
 };

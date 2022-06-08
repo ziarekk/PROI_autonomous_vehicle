@@ -6,9 +6,10 @@
 Autor: Karol Ziarek
 */
 
-class TerminalDisplay: public Display{
+class LinuxTerminalDisplay: public Display{
 public:
-    TerminalDisplay() = default;
+    LinuxTerminalDisplay() = default;
     void setPosition(Position coords);
     void drawPoint(Position coords, char character) override;
+    char getTexture(Field& field) override;
 };
